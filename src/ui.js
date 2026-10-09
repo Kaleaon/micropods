@@ -61,7 +61,7 @@ export function buildWiring(parent, M, registry) {
   });
 }
 
-export function buildUI(rig, M, registry) {
+export function buildUI(rig, M, registry, requestRender = () => {}) {
   const ui = document.getElementById('ui');
   const mk = (text, active) => {
     const b = document.createElement('button');
@@ -79,6 +79,7 @@ export function buildUI(rig, M, registry) {
     // interior close-ups: hide labels (they'd fill the frame); restore on exterior views
     if (name === 'podA' || name === 'podB') applyLabels(false);
     else applyLabels();
+    requestRender();
   };
   Object.keys(VIEWS).forEach(name => {
     const b = mk(name === 'podA' ? 'POD A' : name === 'podB' ? 'POD B' : name.toUpperCase(), name === 'iso');
@@ -89,7 +90,7 @@ export function buildUI(rig, M, registry) {
   const toggle = (text, initial, fn) => {
     const b = mk(text, initial);
     let on = initial;
-    b.onclick = () => { on = !on; b.classList.toggle('active', on); fn(on); };
+    b.onclick = () => { on = !on; b.classList.toggle('active', on); fn(on); requestRender(); };
     fn(initial);
   };
 
@@ -118,6 +119,7 @@ export function buildUI(rig, M, registry) {
     dayBtn.textContent = night ? 'NIGHT' : 'DAY';
     dayBtn.classList.toggle('active', !night);
     rig.setDayNight(M, registry, night);
+    requestRender();
   };
   toggle('INSULATION', true, on => registry.insul.forEach(m => m.visible = on));
   toggle('WIRING', false, on => { if (registry.wiring) registry.wiring.visible = on; });
