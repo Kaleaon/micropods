@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MicroPod Hotel — Pod Type A 3D</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0b0e13; }
+    #app { position: fixed; inset: 0; }
+    #ui { position: fixed; top: 12px; left: 12px; z-index: 10; display: flex; gap: 8px; flex-wrap: wrap; max-width: 90vw; }
+    #ui button {
+      background: rgba(20,26,36,.85); color: #dfe8f5; border: 1px solid #33415c;
+      border-radius: 8px; padding: 8px 12px; font-size: 13px; cursor: pointer;
+      font-family: system-ui, sans-serif;
+    }
+    #ui button:hover { background: rgba(38,50,72,.9); }
+    #ui button.active { border-color: #7fb4ff; color: #9fd0ff; }
+    #label { position: fixed; bottom: 12px; left: 12px; z-index: 10; color: #8fa0bd;
+      font: 12px system-ui, sans-serif; background: rgba(20,26,36,.7);
+      padding: 6px 10px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <div id="app"></div>
+  <div id="ui"></div>
+  <div id="label">Pod Type A — 20'×10'×10' twin micro-hotel unit</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
