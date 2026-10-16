@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MicroPod Campus — 3D Architectural Exterior & Site Rendering (900 NE Jefferson, Peoria, IL)</title>
+  <style>
+    html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #070a0f; font-family: system-ui, -apple-system, sans-serif; }
+    #canvas-container { position: fixed; inset: 0; }
+    #ui { position: fixed; top: 14px; left: 14px; z-index: 10; display: flex; gap: 8px; flex-wrap: wrap; max-width: 92vw; }
+    #ui button {
+      background: rgba(13, 24, 40, 0.88); color: #d8e5f5; border: 1px solid #294263;
+      border-radius: 8px; padding: 8px 12px; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.5px; cursor: pointer; backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: all 0.15s ease;
+    }
+    #ui button:hover { background: rgba(25, 45, 75, 0.95); border-color: #5885c2; }
+    #ui button.active { border-color: #ffd166; color: #ffd166; background: rgba(30, 48, 75, 0.95); }
+    #info-card {
+      position: fixed; bottom: 14px; left: 14px; z-index: 10; max-width: 480px;
+      background: rgba(10, 18, 30, 0.9); border: 1px solid #1f3552; border-radius: 10px;
+      padding: 12px 16px; color: #bcd6f5; font-size: 11px; line-height: 1.5;
+      backdrop-filter: blur(10px); box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+    }
+    #info-card h3 { margin: 0 0 4px; font-size: 13px; color: #fff; letter-spacing: 0.5px; }
+    #info-card b { color: #ffd166; }
+    #badge-container {
+      position: fixed; top: 14px; right: 14px; z-index: 10;
+      display: flex; flex-direction: column; gap: 6px; align-items: flex-end;
+    }
+    .badge {
+      background: rgba(13, 24, 40, 0.85); border: 1px solid #ffd166; border-radius: 6px;
+      padding: 5px 10px; font-size: 10px; font-weight: 700; color: #ffd166; letter-spacing: 1px;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="canvas-container"></div>
+  <div id="ui"></div>
+  <div id="badge-container">
+    <div class="badge">900 NE JEFFERSON AVE · 1.49 ACRES</div>
+    <div class="badge" style="border-color:#7fb4ff; color:#7fb4ff;">IBC 510.2 PODIUM · 9 LEVELS</div>
+  </div>
+  <div id="info-card">
+    <h3>CAMPUS ARCHITECTURAL PERSPECTIVE</h3>
+    <b>Site:</b> 1.49 Acres (380' frontage × 170' depth) on 14' sloped hillside.<br>
+    <b>Program:</b> 2 Banked Lower Levels (Parking/Dock/MEP) + 7 Levels Above Grade.<br>
+    <b>Amenities:</b> Public Bodega (7,000 SF), Coffeeshop (3,000 SF), Grand Spa with Central Glass-Roof Atrium Pool, Twin Towers (144 Men's / 144 Women's Beds), and Twin Rooftop Sky Decks.
+  </div>
+
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+    const container = document.getElementById('canvas-container');
+
+    // 1. Renderer & Scene
+    const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0c131d);
+    scene.fog = new THREE.FogExp2(0x0c131d, 0.0035);
+
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 1, 1000);
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.maxPolarAngle = Math.PI * 0.49;
+
+    // 2. Lighting Rig
+    const hemiLight = new THREE.HemisphereLight(0xddeeff, 0x182230, 0.65);
+    scene.add(hemiLight);
+
+    const sun = new THREE.DirectionalLight(0xfff3e0, 2.8);
+    sun.position.set(120, 180, 140);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -160; sun.shadow.camera.right = 160;
+    sun.shadow.camera.top = 160; sun.shadow.camera.bottom = -160;
+    sun.shadow.camera.near = 10; sun.shadow.camera.far = 500;
+    sun.shadow.bias = -0.0004;
+    scene.add(sun);
+
+    const fillSun = new THREE.DirectionalLight(0x7eaed9, 0.6);
+    fillSun.position.set(-140, 90, -100);
+    scene.add(fillSun);
+
+    // Warm Interior Glow & Pool Lights
+    const poolGlow = new THREE.PointLight(0x38bdf8, 8, 80, 2);
+    poolGlow.position.set(0, 42, 0);
+    scene.add(poolGlow);
+
+    const retailGlow = new THREE.PointLight(0xffd166, 6, 120, 1.8);
+    retailGlow.position.set(0, 16, 40);
+    scene.add(retailGlow);
+
+    // 3. Materials
+    const M = {
+      grass: new THREE.MeshStandardMaterial({ color: 0x223824, roughness: 0.9 }),
+      asphalt: new THREE.MeshStandardMaterial({ color: 0x14181f, roughness: 0.85 }),
+      sidewalk: new THREE.MeshStandardMaterial({ color: 0xb5bec9, roughness: 0.7 }),
+      concreteRetaining: new THREE.MeshStandardMaterial({ color: 0x5a6572, roughness: 0.8 }),
+      podiumDarkMetal: new THREE.MeshStandardMaterial({ color: 0x181e26, roughness: 0.4, metalness: 0.6 }),
+      curtainGlass: new THREE.MeshPhysicalMaterial({ color: 0xbfdbfe, roughness: 0.1, metalness: 0.1, transparent: true, opacity: 0.55, transmission: 0.7 }),
+      atriumGlass: new THREE.MeshPhysicalMaterial({ color: 0x93c5fd, roughness: 0.05, metalness: 0.1, transparent: true, opacity: 0.45, transmission: 0.85 }),
+      water: new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.1, metalness: 0.2 }),
+      towerFacade: new THREE.MeshStandardMaterial({ color: 0x2a3545, roughness: 0.35, metalness: 0.5 }),
+      spandrelBronze: new THREE.MeshStandardMaterial({ color: 0x3d332a, roughness: 0.4, metalness: 0.6 }),
+      roofTurf: new THREE.MeshStandardMaterial({ color: 0x2e4f32, roughness: 0.95 }),
+      fireGlow: new THREE.MeshStandardMaterial({ color: 0xff6600, emissive: 0xff6600, emissiveIntensity: 3.5 }),
+      signGlow: new THREE.MeshStandardMaterial({ color: 0xffe082, emissive: 0xffe082, emissiveIntensity: 2.2 }),
+      steel: new THREE.MeshStandardMaterial({ color: 0x64748b, roughness: 0.3, metalness: 0.8 }),
+      pdlcGlass: new THREE.MeshPhysicalMaterial({ color: 0xdfe8ee, roughness: 0.08, metalness: 0.95, envMapIntensity: 1.0 }),
+      zoningPlane: new THREE.MeshBasicMaterial({ color: 0xffd166, transparent: true, opacity: 0.12, wireframe: true }),
+      podiumLine: new THREE.MeshBasicMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.75 })
+    };
+
+    // Helper: Create Box Mesh
+    function makeBox(w, h, d, x, y, z, mat, shadow = true) {
+      const mesh = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
+      mesh.position.set(x, y + h / 2, z);
+      mesh.castShadow = shadow;
+      mesh.receiveShadow = true;
+      scene.add(mesh);
+      return mesh;
+    }
+
+    // 4. Site Topography & Civil Earthwork (14' Slope: z=-85 to z=+85)
+    // 380' Frontage (x: -190 to +190) × 170' Depth (z: -85 to +85)
+    // NE Jefferson Ave (High Side El. 514'): z = +85 to +130, y = 14
+    // Rear Alley / Dock (Low Side El. 500'): z = -85 to -130, y = 0
+
+    // High Side: NE Jefferson Ave Street & Sidewalk (y = 14.0)
+    makeBox(480, 1, 60, 0, 13.5, 120, M.asphalt, false);     // Jefferson Ave Roadway
+    makeBox(480, 0.6, 20, 0, 14.0, 85, M.sidewalk, true);    // Concrete Sidewalk
+    // Street Trees along Jefferson
+    for (let tx = -170; tx <= 170; tx += 45) {
+      makeBox(0.8, 12, 0.8, tx, 14.6, 88, M.spandrelBronze);
+      const foliage = new THREE.Mesh(new THREE.SphereGeometry(4.5, 12, 10), M.grass);
+      foliage.position.set(tx, 26, 88);
+      foliage.castShadow = true;
+      scene.add(foliage);
+    }
+
+    // 25' Front Setback Pedestrian Plaza & Outdoor Café
+    makeBox(360, 0.4, 25, 0, 14.0, 62.5, M.sidewalk, true);
+    // Outdoor Café Umbrellas & Tables
+    [-120, -95, -70, 70, 95, 120].forEach(cx => {
+      makeBox(0.2, 7, 0.2, cx, 14.4, 62, M.steel);
+      const umbrella = new THREE.Mesh(new THREE.ConeGeometry(3.5, 1.2, 8), M.spandrelBronze);
+      umbrella.position.set(cx, 21.5, 62);
+      scene.add(umbrella);
+      makeBox(2.2, 2.2, 2.2, cx, 14.4, 62, M.podiumDarkMetal);
+    });
+
+    // Hillside Sloped Terrain & Retaining Walls
+    // Terraced turf flanking the building on East and West property lines (15' side setbacks)
+    [-175, 175].forEach(sx => {
+      makeBox(30, 14, 150, sx, 0, 0, M.concreteRetaining, true);
+    });
+
+    // Low Side: Rear Commercial Delivery Alley & Dock Apron (y = 0.0, z = -85 to -130)
+    makeBox(480, 0.5, 50, 0, -0.5, -110, M.asphalt, false);
+
+    // 5. Building Massing — The 9-Level Stack
+
+    // LOWER 2 (Subgrade Basement: y = -10 to 0) & LOWER 1 (Banked Walkout: y = 0 to 14)
+    // Sits cut into the hillside: Footprint 320' wide × 140' deep
+    makeBox(320, 14, 140, 0, 0, 0, M.concreteRetaining, true);
+
+    // Lower 1 Rear Banked Elevation (Dock & Parking Entrance at z = -70, y = 0 to 14)
+    // Commercial Loading Dock Opening (35' wide × 14' high)
+    makeBox(35, 12, 4, -80, 0, -70, M.asphalt);
+    // Semi Delivery Truck parked at dock
+    makeBox(10, 12, 36, -80, 0, -85, M.spandrelBronze); // Trailer
+    makeBox(9.5, 10, 14, -80, 0, -106, M.podiumDarkMetal); // Cab
+    // Covered Keycard Parking Portal (65 Stalls)
+    makeBox(40, 10, 4, 60, 0, -70, M.asphalt);
+    makeBox(44, 1.5, 12, 60, 10, -74, M.podiumDarkMetal); // Portal Canopy
+
+    // LEVEL 1: Street Commercial Concourse (y = 14 to 30, Height 16')
+    // Double-Height Glass Curtainwall along NE Jefferson (z = 50)
+    makeBox(320, 16, 120, 0, 14, -10, M.curtainGlass, false);
+    // Perimeter Structural Concrete / Steel Columns
+    for (let cx = -150; cx <= 150; cx += 30) {
+      makeBox(2, 16, 2, cx, 14, 50, M.podiumDarkMetal);
+      makeBox(2, 16, 2, cx, 14, -70, M.podiumDarkMetal);
+    }
+    // Illuminated Storefront Fascia Signage
+    const bodegaSign = makeBox(70, 3.2, 0.8, -80, 26, 51, M.signGlow);
+    const coffeeSign = makeBox(60, 3.2, 0.8, 80, 26, 51, M.signGlow);
+    const lobbySign  = makeBox(45, 2.8, 0.8, 0, 26, 51, M.signGlow);
+
+    // LEVEL 2: Transitional Podium Base (Family & Neutral Deck: y = 30 to 40, Height 10')
+    makeBox(320, 10, 120, 0, 30, -10, M.podiumDarkMetal, true);
+    // Window Band with Solar Louvers
+    makeBox(316, 6, 2, 0, 32, 51, M.curtainGlass, false);
+    makeBox(316, 6, 2, 0, 32, -71, M.curtainGlass, false);
+
+    // DECK 3: The Grand Thermal Wellness Spa Podium (y = 40 to 52, Height 12')
+    // Spans the full width (320' × 120')
+    makeBox(320, 12, 120, 0, 40, -10, M.spandrelBronze, true);
+
+    // CENTRAL GLASS-ROOF ATRIUM OVER THE 50' LAP POOL (Center x: -40 to +40, z: -40 to +20)
+    // Barrel-Vaulted Arched Glass Skylight Canopy (y = 52 to 68, Height 16')
+    const atriumGeom = new THREE.CylinderGeometry(40, 40, 60, 24, 1, false, 0, Math.PI);
+    const atriumMesh = new THREE.Mesh(atriumGeom, M.atriumGlass);
+    atriumMesh.rotation.z = Math.PI / 2;
+    atriumMesh.rotation.y = Math.PI / 2;
+    atriumMesh.position.set(0, 52, -10);
+    scene.add(atriumMesh);
+    // Arched Steel Mullion Ribs
+    for (let rz = -38; rz <= 18; rz += 10) {
+      const rib = new THREE.Mesh(new THREE.TorusGeometry(40, 0.6, 8, 24, Math.PI), M.steel);
+      rib.rotation.y = Math.PI / 2;
+      rib.position.set(0, 52, rz);
+      scene.add(rib);
+    }
+    // Heated Lap Pool inside (visible through glass)
+    makeBox(24, 2, 50, 0, 41, -10, M.water);
+
+    // DECKS 4 THROUGH 7: TWIN RESIDENTIAL TOWERS (y = 52 to 92, Height 40' / 4 Stories)
+    // West Tower (Men's Residential): x = -150 to -45 (Width 105' × Depth 110')
+    makeBox(105, 40, 110, -97.5, 52, -10, M.towerFacade, true);
+    // East Tower (Women's Residential): x = +45 to +150 (Width 105' × Depth 110')
+    makeBox(105, 40, 110, 97.5, 52, -10, M.towerFacade, true);
+
+    // Perimeter Sleeping Pod Window Bands with PDLC Smart Glass
+    [56, 66, 76, 86].forEach(ly => {
+      // West Tower Windows (Front & Rear)
+      makeBox(95, 6, 1.5, -97.5, ly, 46, M.pdlcGlass);
+      makeBox(95, 6, 1.5, -97.5, ly, -66, M.pdlcGlass);
+      // East Tower Windows (Front & Rear)
+      makeBox(95, 6, 1.5, 97.5, ly, 46, M.pdlcGlass);
+      makeBox(95, 6, 1.5, 97.5, ly, -66, M.pdlcGlass);
+      // Architectural Spandrel Bands
+      makeBox(106, 3.8, 111, -97.5, ly + 6, -10, M.spandrelBronze);
+      makeBox(106, 3.8, 111, 97.5, ly + 6, -10, M.spandrelBronze);
+    });
+
+    // Central Core Service & Elevator Towers (Rising through both towers)
+    makeBox(30, 48, 40, -97.5, 52, -10, M.podiumDarkMetal); // West Core
+    makeBox(30, 48, 40, 97.5, 52, -10, M.podiumDarkMetal);  // East Core
+
+    // 6. TWIN ROOFTOPS (Above Deck 7: y = 92)
+    // West Rooftop (Men's Sky Deck)
+    makeBox(100, 1.5, 105, -97.5, 92, -10, M.asphalt);
+    // Glass Perimeter Windbreak Railings (6' tall)
+    makeBox(102, 6, 107, -97.5, 93.5, -10, M.curtainGlass, false);
+    // Open-Air Pergola
+    makeBox(50, 9, 35, -97.5, 93.5, -10, M.steel, true);
+    // 3 Glowing Natural Gas Fire Pits
+    [-115, -97.5, -80].forEach(fx => {
+      makeBox(6, 1.8, 6, fx, 93.5, -10, M.spandrelBronze);
+      makeBox(3.5, 0.4, 3.5, fx, 95.3, -10, M.fireGlow);
+      const fLight = new THREE.PointLight(0xff6600, 2.5, 18);
+      fLight.position.set(fx, 97, -10);
+      scene.add(fLight);
+    });
+
+    // East Rooftop (Women's Sky Deck)
+    makeBox(100, 1.5, 105, 97.5, 92, -10, M.roofTurf);
+    // Glass Perimeter Windbreak Railings (6' tall)
+    makeBox(102, 6, 107, 97.5, 93.5, -10, M.curtainGlass, false);
+    // Sun Cabanas (White fabric structures)
+    [65, 85, 105, 125].forEach(cx => {
+      makeBox(12, 8.5, 14, cx, 93.5, 25, M.sidewalk, true);
+    });
+    // Outdoor Yoga / Pilates Turf Center (Green lawn)
+    makeBox(55, 0.2, 45, 97.5, 93.6, -15, M.grass);
+
+    // 7. Regulatory & Code Overlays (Zoning Setback Envelope & IBC Podium Line)
+    // Peoria UDC Setback Planes (25' Front, 15' Side, 20' Rear)
+    const zoningEnvelope = new THREE.Group();
+    zoningEnvelope.visible = false;
+    scene.add(zoningEnvelope);
+    const zBox = new THREE.Mesh(new THREE.BoxGeometry(350, 110, 130), M.zoningPlane);
+    zBox.position.set(0, 55, -2.5);
+    zoningEnvelope.add(zBox);
+
+    // IBC 510.2 3-Hour Fire Separation Podium Line (at y = 52)
+    const podiumMarker = new THREE.Group();
+    podiumMarker.visible = false;
+    scene.add(podiumMarker);
+    const pMesh = new THREE.Mesh(new THREE.BoxGeometry(325, 1.5, 125), M.podiumLine);
+    pMesh.position.set(0, 52, -10);
+    podiumMarker.add(pMesh);
+
+    // 8. Distant Peoria River & Bluff Horizon
+    const horizonGeom = new THREE.CylinderGeometry(400, 400, 160, 48, 1, true);
+    const horizMat = new THREE.MeshBasicMaterial({ color: 0x091422, side: THREE.BackSide });
+    const horizon = new THREE.Mesh(horizonGeom, horizMat);
+    horizon.position.set(0, 60, 0);
+    scene.add(horizon);
+
+    // 9. Camera View Presets
+    const VIEWS = {
+      street: { name: 'STREET VIEW (JEFFERSON)', p: [0, 22, 160],   t: [0, 36, 30] },
+      aerial: { name: 'AERIAL CAMPUS (3D)',     p: [190, 145, 190], t: [0, 42, -10] },
+      atrium: { name: 'GLASS SPA ATRIUM',       p: [0, 72, 50],     t: [0, 52, -10] },
+      rooftop:{ name: 'TWIN SKY DECKS',         p: [-100, 120, 80], t: [-30, 90, -10] },
+      dock:   { name: 'LOWER 1 DOCK & PARKING', p: [-140, 25, -160],t: [0, 15, -70] },
+      side:   { name: '14\' SLOPE SECTION',     p: [-280, 50, 0],   t: [0, 45, 0] }
+    };
+
+    function setCamera(key) {
+      const v = VIEWS[key];
+      camera.position.set(...v.p);
+      controls.target.set(...v.t);
+      controls.update();
+      document.querySelectorAll('#ui button[data-view]').forEach(b => {
+        b.classList.toggle('active', b.dataset.view === key);
+      });
+    }
+
+    // 10. UI Generation
+    const ui = document.getElementById('ui');
+    const mk = (text, active = false) => {
+      const b = document.createElement('button');
+      b.textContent = text;
+      if (active) b.classList.add('active');
+      ui.appendChild(b);
+      return b;
+    };
+
+    Object.entries(VIEWS).forEach(([k, v]) => {
+      const btn = mk(v.name, k === 'aerial');
+      btn.dataset.view = k;
+      btn.onclick = () => setCamera(k);
+    });
+
+    // Toggles
+    const toggle = (text, initial, fn) => {
+      const b = mk(text, initial);
+      let on = initial;
+      b.onclick = () => { on = !on; b.classList.toggle('active', on); fn(on); };
+      fn(initial);
+      return b;
+    };
+
+    // Day / Night Toggle
+    let night = false;
+    const dayBtn = mk('DAY SUN', true);
+    dayBtn.onclick = () => {
+      night = !night;
+      dayBtn.textContent = night ? 'NIGHT SKY' : 'DAY SUN';
+      dayBtn.classList.toggle('active', !night);
+      if (night) {
+        sun.intensity = 0.2; fillSun.intensity = 0.1;
+        hemiLight.intensity = 0.25;
+        scene.background.set(0x04070c);
+        scene.fog.color.set(0x04070c);
+        poolGlow.intensity = 18;
+        retailGlow.intensity = 14;
+        M.signGlow.emissiveIntensity = 4.0;
+        M.pdlcGlass.opacity = 0.7; // Illuminated interior rooms at night
+      } else {
+        sun.intensity = 2.8; fillSun.intensity = 0.6;
+        hemiLight.intensity = 0.65;
+        scene.background.set(0x0c131d);
+        scene.fog.color.set(0x0c131d);
+        poolGlow.intensity = 8;
+        retailGlow.intensity = 6;
+        M.signGlow.emissiveIntensity = 2.2;
+        M.pdlcGlass.opacity = 0.55;
+      }
+    };
+
+    toggle('ZONING SETBACKS', false, on => { zoningEnvelope.visible = on; });
+    toggle('IBC 510.2 PODIUM', false, on => { podiumMarker.visible = on; });
+
+    // PDLC Smart Glass State Toggle
+    let isWindow = true;
+    const pdlcBtn = mk('PDLC: WINDOW', true);
+    pdlcBtn.onclick = () => {
+      isWindow = !isWindow;
+      pdlcBtn.textContent = isWindow ? 'PDLC: WINDOW' : 'PDLC: MIRROR';
+      pdlcBtn.classList.toggle('active', isWindow);
+      if (isWindow) {
+        M.pdlcGlass.metalness = 0.1;
+        M.pdlcGlass.roughness = 0.08;
+        M.pdlcGlass.opacity = 0.45;
+      } else {
+        M.pdlcGlass.metalness = 0.98;
+        M.pdlcGlass.roughness = 0.05;
+        M.pdlcGlass.opacity = 1.0;
+      }
+      M.pdlcGlass.needsUpdate = true;
+    };
+
+    // Initialize Default View
+    setCamera('aerial');
+
+    // 11. Render Loop & Responsive Resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>

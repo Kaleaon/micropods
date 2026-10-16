@@ -30,12 +30,14 @@ Open `dist/index.html` directly — no server needed.
 
 ## Docs
 
-- `docs/blueprints/` — dimensioned architectural plan sheets (HTML/SVG):
-  - `campus_master_plan.html` — Complete 7-sheet architectural blueprint set (Civil, Section, Plans, Core, Matrix, Lift)
+- `docs/blueprints/` — dimensioned architectural plan sheets & 3D viewers (HTML/SVG/WebGL):
+  - `campus_rendering_3d.html` — **Interactive 3D Architectural Exterior & Site Rendering** (Sloped 1.49-acre campus, retail glass, central atrium pool, twin towers, sky decks, day/night, zoning planes)
+  - `campus_master_plan.html` — Complete 8-sheet architectural blueprint set (Civil, Section, Plans, Core, Matrix, Lift, Sheet R-1 Rendering Perspective & Code Matrix)
   - `pod_type_b_bath.html` — 10'×10' Full Bathroom Pod blueprints
   - `pod_type_a.html` — Twin Sleeping Pod blueprints & MEP notes
   - `pod_type_a_iso.html` — Standalone SVG isometric dollhouse cutaways
-- `docs/engineering/` — engineering, structural, MEP, and cost analysis basis:
+- `docs/engineering/` — engineering, structural, MEP, statutory zoning & cost basis:
+  - `ZONING_CODE_COMPLIANCE.md` — **Peoria UDC PUD, IBC 2021 (510.2 Podium), Illinois Accessibility Code (ADA), NFPA 101/13 Basis**
   - `SUITE_VARIETY_SPEC.md` — 5-Foot Modular Grid, Suite Profiles, Cargo Lift & Panelized Prefabrication
   - `CAMPUS_MASTER_PLAN.md` — Civil, slope engineering, 9-level stack, cargo lift & swap-out protocol
   - `COST_ANALYSIS.md` — Detailed bill of materials, trade breakdown & ROI models
