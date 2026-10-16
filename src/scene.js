@@ -8,7 +8,11 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 import { RectAreaLightUniformsLib } from 'three/addons/lights/RectAreaLightUniformsLib.js';
 
 export function createRegistry() {
-  return { xray: [], insul: [], roof: null, skylightPanels: [], skylightLights: [], labels: [], berthLights: [] };
+  return {
+    xray: [], insul: [], roof: null, skylightPanels: [],
+    skylightLights: [], labels: [], berthLights: [], bathPod: null,
+    pdlcPanels: [], panelizedGroup: null
+  };
 }
 
 export function createScene(renderer) {
@@ -16,13 +20,13 @@ export function createScene(renderer) {
 
   const scene = new THREE.Scene();
   scene.background = new THREE.Color(0x0b0e13);
-  scene.fog = new THREE.Fog(0x0b0e13, 70, 160);
+  scene.fog = new THREE.Fog(0x0b0e13, 90, 240);
 
-  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 500);
-  camera.position.set(27, 21, 27);
+  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 800);
+  camera.position.set(-5, 42, 60);
 
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.target.set(10, 3.5, 5);
+  controls.target.set(-5, 4.0, 5);
   controls.maxPolarAngle = Math.PI * 0.495;
   controls.enableDamping = true;
   controls.dampingFactor = 0.08;
@@ -37,18 +41,18 @@ export function createScene(renderer) {
   /* key sun: warm, shadow-casting */
   scene.add(new THREE.HemisphereLight(0xdfeaff, 0x2a2018, 0.5));
   const sun = new THREE.DirectionalLight(0xfff1dd, 2.6);
-  sun.position.set(25, 32, 18);
+  sun.position.set(0, 48, 35);
   sun.castShadow = true;
   sun.shadow.mapSize.set(2048, 2048);
-  sun.shadow.camera.left = -18; sun.shadow.camera.right = 18;
-  sun.shadow.camera.top = 18; sun.shadow.camera.bottom = -18;
-  sun.shadow.camera.near = 1; sun.shadow.camera.far = 90;
+  sun.shadow.camera.left = -70; sun.shadow.camera.right = 60;
+  sun.shadow.camera.top = 40; sun.shadow.camera.bottom = -40;
+  sun.shadow.camera.near = 1; sun.shadow.camera.far = 140;
   sun.shadow.bias = -0.0005;
   sun.shadow.normalBias = 0.02;
   scene.add(sun);
   /* cool fill from the opposite side */
   const fill = new THREE.DirectionalLight(0x9fc3e8, 0.6);
-  fill.position.set(-18, 14, -12);
+  fill.position.set(-30, 20, -25);
   scene.add(fill);
 
   /* warm interior accents per pod + cool spine accent (kept dim; IBL carries ambient) */
@@ -68,17 +72,18 @@ export function createScene(renderer) {
     berthLights.push(p);
   });
 
-  /* soft ground disc under the module */
+  /* expansive ground plane under the campus concourse modules */
   const ground = new THREE.Mesh(
-    new THREE.CircleGeometry(30, 48),
+    new THREE.PlaneGeometry(160, 100),
     new THREE.MeshStandardMaterial({ color: 0x11151c, roughness: 1 })
   );
   ground.rotation.x = -Math.PI / 2;
-  ground.position.y = -0.52;
+  ground.position.set(-5, -0.52, 5);
   ground.receiveShadow = true;
   scene.add(ground);
-  const grid = new THREE.GridHelper(60, 60, 0x2a5f9e, 0x16283f);
-  grid.position.y = -0.5;
+  // Grid helper with 5-foot divisions (160' x 160' / 32 = 5-foot cells)
+  const grid = new THREE.GridHelper(160, 32, 0x2a5f9e, 0x16283f);
+  grid.position.set(-5, -0.5, 5);
   scene.add(grid);
 
   const rig = { scene, camera, controls, sun, fill, podGlowA, podGlowB, spineGlow, berthLights };
@@ -129,11 +134,10 @@ export function addContactShadows(scene) {
     m.renderOrder = 5;
     scene.add(m);
   };
-  put(4.8, 7.8, 10, 5.5);        // bunk spine
-  put(4.6, 2.6, 5, 9);           // desk A
-  put(4.6, 2.6, 15, 9);          // desk B
-  put(2.6, 4.6, 1, 8);           // side run L
-  put(2.6, 4.6, 19, 8);          // side run R
-  put(3.6, 2.4, 1.5, 9, 0.03);   // L-leg shelves A
-  put(3.6, 2.4, 18.5, 9, 0.03);  // L-leg shelves B
+  put(4.8, 7.8, 10, 5.5);        // bunk spine Pod A
+  put(10, 10, -9, 5);            // Pod C (Executive 10')
+  put(15, 10, -24.5, 5);         // Pod D (Couples 15')
+  put(20, 10, -45, 5);           // Pod E (Family 20')
+  put(10.5, 10.5, 29, 5);        // 10x10 bath pod
+  put(12.5, 14.5, 42, 5);        // Central Core Cargo Lift
 }

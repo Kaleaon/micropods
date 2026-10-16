@@ -15,23 +15,33 @@ npm run build    # self-contained dist/index.html (single file, works offline)
 
 Open `dist/index.html` directly — no server needed.
 
-## Layout
+## Layout & Modules
 
-- **Pod A / Pod B** (8'×10' each): entry door with frosted transom + keypad,
-  4' shoji closet, 2'×2' water/air column, 4' shelving with microwave/air-fryer
-  niche, flat 4'×2' desk with full-width mirror, virtual skylight
-- **Bunk spine** (4'×7'×10'): lower + upper berths with privacy curtains,
-  per-berth touchpad, 32" TV, headboard shelf with Qi2 + USB, LED cove lighting
-- **Water column**: espresso / hot / cold / sparkling / nugget ice dispenser
-  with handwashing basin below
+- **Universal 5-Foot Modular Grid**: All modules are built on strict 10', 15', and 20' exterior widths × 10' depth × 10' height:
+  - **Pod Type A** (20'W × 10'D × 10'H Twin Standard): Two solo guest pods sharing an interlocking center bunk spine, virtual skylights, shoji closets, and dual PDLC smart mirror-windows.
+  - **Pod Type B** (10'W × 10'D × 10'H Twin-Suite Bath Core): Two independent 5'×10' private full bathrooms located in the central building core.
+  - **Pod Type C** (10'W × 10'D × 10'H Executive Solo): Solo queen-width berth, 5' executive workstation desk, mini-fridge/espresso tower, and 4'×7.2' PDLC smart mirror-window.
+  - **Pod Type D** (15'W × 10'D × 10'H Couples Micro-Suite): Dedicated Queen bed, loveseat breakfast banquette, vanity/desk, full hospitality credenza, and 5'×7.2' PDLC smart mirror-window.
+  - **Pod Type E** (20'W × 10'D × 10'H Family Quad Bunk): Dual 2-tier bunk stacks (4 private sleeping berths with acoustic curtains), drop-leaf dining/game table, 4 lockable family lockers, and dual smart mirror-windows.
+  - **Central Core Cargo Lift & Rigging Shaft** (12'W × 14'D hoistway): 10,000 lb Class C-3 freight elevator (10'×12' cab, 8' bi-parting doors) connecting Lower 1 delivery dock to all levels for 4-to-6 hour pod swap-outs.
+  - **Panelized Cassette Prefabrication**: All pods break down into 5'×10' flat-pack wall, floor, and ceiling cassettes (cold-formed steel frames, cam-lock fasteners, quick-disconnect Wago/PEX harnesses) transported on wheeled A-frame carts down the 6' concourse.
+  - **PDLC Smart-Glass Mirror-Windows**: Unpowered = 100% private reflective mirror; powered (12V) = transparent panoramic window overlooking the Peoria river bluffs and skyline.
+- **900 NE Jefferson Campus** (1.49-Acre Sloped Site): 9-level campus (2 banked lower levels + 7 above grade), Men's Sento Bathhouse, Women's Sanctuary Spa, Central Glass-Roof Lap Pool Atrium, Street Bodega & Coffeeshop, and Twin Rooftop Sky Decks.
 
 ## Docs
 
-- `docs/blueprints/` — dimensioned plan sheets (HTML) + concept render
-- `docs/engineering/` — preliminary MEP/structural/fire engineering basis
-  (NOT for construction — requires licensed PE/ architect review)
+- `docs/blueprints/` — dimensioned architectural plan sheets (HTML/SVG):
+  - `campus_master_plan.html` — Complete 7-sheet architectural blueprint set (Civil, Section, Plans, Core, Matrix, Lift)
+  - `pod_type_b_bath.html` — 10'×10' Full Bathroom Pod blueprints
+  - `pod_type_a.html` — Twin Sleeping Pod blueprints & MEP notes
+  - `pod_type_a_iso.html` — Standalone SVG isometric dollhouse cutaways
+- `docs/engineering/` — engineering, structural, MEP, and cost analysis basis:
+  - `SUITE_VARIETY_SPEC.md` — 5-Foot Modular Grid, Suite Profiles, Cargo Lift & Panelized Prefabrication
+  - `CAMPUS_MASTER_PLAN.md` — Civil, slope engineering, 9-level stack, cargo lift & swap-out protocol
+  - `COST_ANALYSIS.md` — Detailed bill of materials, trade breakdown & ROI models
+  - `BATH_POD_BASIS.md` — Plumbing DFU/WSFU, 140°F elastomeric seals & ventilation
+  - `ENGINEERING_BASIS.md` — Primary MEP/structural assumptions
 
 ## Status
 
-Preliminary design. See `docs/engineering/ENGINEERING_BASIS.md` for
-assumptions and open items.
+Preliminary design, 3D modeling, and master planning complete. Stamped engineering and PE/SE review required for construction documents.

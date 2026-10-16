@@ -23,7 +23,14 @@ export function buildShell(parent, M, registry) {
   shell(3.5, H, T, 18.25, 0, 0, M.shellWall);
   shell(3, 1.5, T, 5,  8.5, 0, M.shellWall);          // headers above doors
   shell(3, 1.5, T, 15, 8.5, 0, M.shellWall);
-  shell(20, H, T, 10, 0, 10, M.shellWall);           // back wall
+
+  /* back wall z=10 : segmented around 4'x7.2' smart windows at x=5 and x=15 */
+  shell(3.0, H, T, 1.5, 0, 10, M.shellWall);          // outer left jamb
+  shell(4.0, 2.8, T, 5.0, 0, 10, M.shellWall);        // under window A (sill)
+  shell(6.0, H, T, 10.0, 0, 10, M.shellWall);         // center spine column
+  shell(4.0, 2.8, T, 15.0, 0, 10, M.shellWall);       // under window B (sill)
+  shell(3.0, H, T, 18.5, 0, 10, M.shellWall);         // outer right jamb
+
   shell(T, H, 10, 0,  0, 5, M.shellWall);            // left wall
   shell(T, H, 10, 20, 0, 5, M.shellWall);           // right wall
   const roof = shell(20.7, T, 10.7, 10, H, 5, M.shellRoof);

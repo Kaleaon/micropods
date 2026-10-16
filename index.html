@@ -3,27 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MicroPod Hotel — Pod Type A 3D</title>
+  <title>MicroPod Campus — Modular Suite Variety & Cargo Lift 3D</title>
   <style>
     html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #0b0e13; }
     #app { position: fixed; inset: 0; }
-    #ui { position: fixed; top: 12px; left: 12px; z-index: 10; display: flex; gap: 8px; flex-wrap: wrap; max-width: 90vw; }
+    #ui { position: fixed; top: 12px; left: 12px; z-index: 10; display: flex; gap: 8px; flex-wrap: wrap; max-width: 92vw; }
     #ui button {
-      background: rgba(20,26,36,.85); color: #dfe8f5; border: 1px solid #33415c;
-      border-radius: 8px; padding: 8px 12px; font-size: 13px; cursor: pointer;
-      font-family: system-ui, sans-serif;
+      background: rgba(20,26,36,.88); color: #dfe8f5; border: 1px solid #33415c;
+      border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.5px; cursor: pointer; font-family: system-ui, -apple-system, sans-serif;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4); transition: all 0.15s ease;
     }
-    #ui button:hover { background: rgba(38,50,72,.9); }
-    #ui button.active { border-color: #7fb4ff; color: #9fd0ff; }
-    #label { position: fixed; bottom: 12px; left: 12px; z-index: 10; color: #8fa0bd;
-      font: 12px system-ui, sans-serif; background: rgba(20,26,36,.7);
-      padding: 6px 10px; border-radius: 6px; }
+    #ui button:hover { background: rgba(38,50,72,.95); border-color: #5d759e; }
+    #ui button.active { border-color: #7fb4ff; color: #9fd0ff; background: rgba(28,45,72,0.95); }
+    #label { position: fixed; bottom: 12px; left: 12px; z-index: 10; color: #bcd6f5;
+      font: 12px system-ui, -apple-system, sans-serif; background: rgba(13,24,38,.85);
+      padding: 8px 14px; border-radius: 6px; border: 1px solid #23364f; }
+    #label b { color: #ffd166; }
   </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
   <div id="app"></div>
   <div id="ui"></div>
-  <div id="label">Pod Type A — 20'×10'×10' twin micro-hotel unit</div>
-  <script type="module" src="/src/main.js"></script>
+  <div id="label"><b>5-FOOT MODULAR SUITES &amp; CARGO LIFT</b> &nbsp;|&nbsp; 900 NE Jefferson Ave Campus &nbsp;|&nbsp; PDLC Smart Glass: Privacy Mirror &harr; Peoria River Panorama</div>
+  <script type="module" src="./src/main.js"></script>
 </body>
 </html>

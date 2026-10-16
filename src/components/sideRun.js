@@ -78,7 +78,8 @@ function buildRun(parent, M, side, registry) {
   rbox(g, 4, 0.15, 2, px, 2.65, 9, M.wall, 0.02);       // flat desktop
   /* mirror: 4' wide, desktop (y2.8) to ceiling (y10), on the INTERIOR face
      of the back wall (wall interior face z=9.83; mirror 0.08 thick) */
-  box(g, 4, 7.2, 0.08, px, 2.8, 9.79, M.mirror);
+  const mir = box(g, 4, 7.2, 0.08, px, 2.8, 9.79, M.mirror);
+  if (registry && registry.pdlcPanels) registry.pdlcPanels.push(mir);
   return g;
 }
 
