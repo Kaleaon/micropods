@@ -26,20 +26,21 @@ Open `dist/index.html` directly — no server needed.
   - **Central Core Cargo Lift & Rigging Shaft** (12'W × 14'D hoistway): 10,000 lb Class C-3 freight elevator (10'×12' cab, 8' bi-parting doors) connecting Lower 1 delivery dock to all levels for 4-to-6 hour pod swap-outs.
   - **Panelized Cassette Prefabrication**: All pods break down into 5'×10' flat-pack wall, floor, and ceiling cassettes (cold-formed steel frames, cam-lock fasteners, quick-disconnect Wago/PEX harnesses) transported on wheeled A-frame carts down the 6' concourse.
   - **PDLC Smart-Glass Mirror-Windows**: Unpowered = 100% private reflective mirror; powered (12V) = transparent panoramic window overlooking the Peoria river bluffs and skyline.
-- **900 NE Jefferson Campus** (1.49-Acre Sloped Site): 9-level campus (2 banked lower levels + 7 above grade), Men's Sento Bathhouse, Women's Sanctuary Spa, Central Glass-Roof Lap Pool Atrium, Street Bodega & Coffeeshop, and Twin Rooftop Sky Decks.
+- **900 NE Jefferson Campus** (1.49-Acre Sloped Site): **10-level campus** (3 subgrade levels: Lower 3 Data Center/MEP, Lower 2 Staff Hub/Laundry, Lower 1 Parking/Dock + 7 levels above grade), Men's Sento Bathhouse, Women's Sanctuary Spa, Central Glass-Roof Lap Pool Atrium, Street Bodega & Coffeeshop, and Twin Rooftop Sky Decks.
 
 ## Docs
 
 - `docs/blueprints/` — dimensioned architectural plan sheets & 3D viewers (HTML/SVG/WebGL):
   - `campus_rendering_3d.html` — **Interactive 3D Architectural Exterior & Site Rendering** (Sloped 1.49-acre campus, retail glass, central atrium pool, twin towers, sky decks, day/night, zoning planes)
-  - `campus_master_plan.html` — Complete 8-sheet architectural blueprint set (Civil, Section, Plans, Core, Matrix, Lift, Sheet R-1 Rendering Perspective & Code Matrix)
+  - `campus_master_plan.html` — **Complete 9-Sheet Architectural Blueprint Set** (Civil, 10-Level Section, Plans, Core, Matrix, Lift, Sheet A-8 Subgrade Data Center & Staff Hub, Sheet R-1 Rendering Perspective & Code Matrix)
   - `pod_type_b_bath.html` — 10'×10' Full Bathroom Pod blueprints
   - `pod_type_a.html` — Twin Sleeping Pod blueprints & MEP notes
   - `pod_type_a_iso.html` — Standalone SVG isometric dollhouse cutaways
 - `docs/engineering/` — engineering, structural, MEP, statutory zoning & cost basis:
+  - `DATA_CENTER_STAFF_FACILITIES.md` — **Mission-Critical Server Room / MDF (8x 42U Racks, N+1 CRAC, 120 kVA UPS, Novec 1230 gas, Biometric Man-Trap) & Staff Amenities Hub (Breakroom w/ kitchenette, nap pods, locker rooms w/ showers)**
   - `ZONING_CODE_COMPLIANCE.md` — **Peoria UDC PUD, IBC 2021 (510.2 Podium), Illinois Accessibility Code (ADA), NFPA 101/13 Basis**
   - `SUITE_VARIETY_SPEC.md` — 5-Foot Modular Grid, Suite Profiles, Cargo Lift & Panelized Prefabrication
-  - `CAMPUS_MASTER_PLAN.md` — Civil, slope engineering, 9-level stack, cargo lift & swap-out protocol
+  - `CAMPUS_MASTER_PLAN.md` — Civil, slope engineering, 10-level stack, cargo lift & swap-out protocol
   - `COST_ANALYSIS.md` — Detailed bill of materials, trade breakdown & ROI models
   - `BATH_POD_BASIS.md` — Plumbing DFU/WSFU, 140°F elastomeric seals & ventilation
   - `ENGINEERING_BASIS.md` — Primary MEP/structural assumptions

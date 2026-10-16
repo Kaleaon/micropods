@@ -18,15 +18,15 @@ Based on program optimization, the building is organized into:
 
 ---
 
-## 2. Revised 9-Level Vertical Stack & Floor Program
+## 2. Revised 10-Level Vertical Stack & Floor Program
 
 ```
 ====================================================================================================
-ROOFTOP:  TWIN INDEPENDENT SKY DECKS (Above Deck 7)
+ROOFTOP:  TWIN INDEPENDENT SKY DECKS (Above Deck 7 - El. 599.0')
           - WEST ROOFTOP: Men's Private Sky Deck (Fire pits, river-view loungers, calisthenics)
           - EAST ROOFTOP: Women's Private Sky Deck (Sun cabanas, outdoor yoga/meditation garden)
 ====================================================================================================
-DECKS     TWIN GENDER-SEPARATED RESIDENTIAL TOWERS (Levels 4, 5, 6, 7)
+DECKS     TWIN GENDER-SEPARATED RESIDENTIAL TOWERS (Levels 4, 5, 6, 7 - El. 559.0' to 599.0')
 4 TO 7:   - WEST TOWER (MEN'S RESIDENTIAL):
             * 4 Floors of Men's Pods (18 Twin Modules / 36 beds + 9 Bath Modules per floor)
             * Total Men's Tower Capacity: 144 Sleeping Pods + 72 Private Bath Suites
@@ -36,14 +36,14 @@ DECKS     TWIN GENDER-SEPARATED RESIDENTIAL TOWERS (Levels 4, 5, 6, 7)
             * Total Women's Tower Capacity: 144 Sleeping Pods + 72 Private Bath Suites
             * Floor lounges: Vanity salon (L4), Tea lounge (L5), Reading room (L6), Night shift (L7)
 ====================================================================================================
-DECK 3:   THE GRAND SPA & THERMAL WELLNESS DECK (Full-Width Podium w/ Central Glass Roof)
+DECK 3:   THE GRAND SPA & THERMAL WELLNESS DECK (Full-Width Podium w/ Central Glass Roof - El. 544.0')
           - CENTER: GRAND GLASS-ROOF ATRIUM (50' Heated Lap Pool, Mineral Spa & Botanical Solarium)
           - WEST:   MEN'S SENTO & BATHHOUSE (Hot Soak 104°F, Warm Pool 98°F, Cold Plunge 50°F,
                     Cedar Finnish Sauna 190°F, Eucalyptus Steam, 8x Seated Washing Stalls)
           - EAST:   WOMEN'S SANCTUARY SPA (Vitality Mineral Pool 100°F, Himalayan Salt Sauna,
                     Aromatherapy Steam, 10-Station Vanity Beauty Salon, Private Treatment Suites)
 ====================================================================================================
-LEVEL 2:  ALL-GENDER / FAMILY & EXECUTIVE LEVEL (Full-Width Podium Base)
+LEVEL 2:  ALL-GENDER / FAMILY & EXECUTIVE LEVEL (Full-Width Podium Base - El. 530.0')
           - 16 Executive Queen/Double Pods (couples, medical directors, visiting families)
           - 12 Twin Pod Modules (24 single beds) + 4 Family Quad Bunk Suites
           - 20 Private Bath Modules (Pod Type B) including 6 ADA Universal Roll-In Suites
@@ -55,16 +55,32 @@ LEVEL 1:  PUBLIC STREET CONCOURSE (El. 514.0' - Sidewalk Grade on NE Jefferson A
           - Member Reception, 24/7 Digital Kiosks, Smart Luggage Locker Bank (8,000 SF)
           - Separate Biometric Elevator Portals: West -> Men's Tower / East -> Women's Tower
 ====================================================================================================
-LOWER 1:  BANKED WALKOUT LOGISTICS & PARKING (El. 500.0' - Low Downhill Grade)
+LOWER 1:  BANKED WALKOUT LOGISTICS & PARKING (El. 500.0' - Rear Downhill Alley Grade)
 (Banked)  - Covered, Gated Keycard Parking Deck (65 stalls w/ Level 2 & DC Fast EV Chargers)
           - Enclosed Commercial Delivery Loading Bay (Sysco/groceries & linen trucks)
-          - Automated Trash, Cardboard & Recyclables Compactor Rooms
+          - Automated Trash, Cardboard & Recyclables Compactor Rooms; 10,000 lb Cargo Lift landing
 ----------------------------------------------------------------------------------------------------
-LOWER 2:  SUBGRADE BASEMENT (El. 490.0' - Fully Cut Into Uphill Bank)
-(Basement)- Commercial In-House Linens Laundry Plant (High-temp barrier washers & gas dryers)
-          - Bulk Walk-In Freezers & Cold Storage (Bodega wholesale supply)
-          - Member Long-Term Storage Cages (80 private lockers for winter gear/bicycles)
-          - Central Mechanical: 1600A Switchgear, DHW Boilers, ERV Air Handling, Pumps
+LOWER 2:  UPPER SUBGRADE BASEMENT — STAFF HUB & FACILITIES (El. 490.0' - 10' Cut Below Alley)
+(Basement)- Staff Recharge Breakroom, Commercial Kitchenette, 4x Shift Worker Nap Pods
+          - Men's & Women's Staff Locker Rooms with 4 Private Full Shower Suites
+          - Staff Training & Daily Shift Briefing Conference Room (16 seats)
+          - Housekeeping Operations Center, Uniform Dispatch, Chemical Dispensing (OSHA HAZCOM)
+          - Commercial In-House Linens Laundry Plant (High-temp barrier washers & gas dryers)
+          - Bulk Food & Beverage Storage (Walk-in freezers/coolers for Bodega & Coffeeshop)
+          - Member Long-Term Storage Locker Bank (80 secured cages)
+----------------------------------------------------------------------------------------------------
+LOWER 3:  DEEP SUB-BASEMENT — DATA CENTER & HEAVY MEP VAULT (El. 480.0' - 20' Cut Into Bedrock)
+(Deep Sub)- MISSION-CRITICAL INTERNAL SERVER ROOM / DATA CENTER (MDF - 720 SF):
+            * 8x 42U Server Cabinets (Campus PoE++, smart locks, PMS, CCTV, BMS automation)
+            * N+1 In-Row CRAC Precision Air Conditioning w/ Hot-Aisle Containment (ASHRAE TC 9.9)
+            * 120 kVA 2N Online Double-Conversion UPS (60-min battery runtime)
+            * Novec 1230 / FM-200 Clean Agent Gaseous Fire Suppression (Zero Water Damage)
+            * Biometric Man-Trap Security Vestibule & Dual Diverse Underground Fiber Entrances
+          - HEAVY CENTRAL MEP INFRASTRUCTURE:
+            * 3000A 480V 3-Phase Main Service Switchgear & Automatic Transfer Switches (ATS)
+            * 250 kW Sound-Attenuated Cummins Emergency Generator with 48-hr belly fuel tank
+            * Commercial Heat Pump Water Heaters & 2,500-gallon Domestic Hot Water Storage
+            * 45,000-Gallon Stormwater Retention Vault & Dual Groundwater Dewatering Pumps
 ====================================================================================================
 ```
 

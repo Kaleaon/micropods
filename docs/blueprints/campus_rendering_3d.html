@@ -47,13 +47,14 @@
   <div id="ui"></div>
   <div id="badge-container">
     <div class="badge">900 NE JEFFERSON AVE · 1.49 ACRES</div>
-    <div class="badge" style="border-color:#7fb4ff; color:#7fb4ff;">IBC 510.2 PODIUM · 9 LEVELS</div>
+    <div class="badge" style="border-color:#38bdf8; color:#38bdf8;">IBC 510.2 PODIUM · 10 LEVELS</div>
+    <div class="badge" style="border-color:#10b981; color:#10b981;">SUB-BASEMENT DATA CENTER (MDF)</div>
   </div>
   <div id="info-card">
-    <h3>CAMPUS ARCHITECTURAL PERSPECTIVE</h3>
+    <h3>CAMPUS ARCHITECTURAL PERSPECTIVE (10-LEVEL STACK)</h3>
     <b>Site:</b> 1.49 Acres (380' frontage × 170' depth) on 14' sloped hillside.<br>
-    <b>Program:</b> 2 Banked Lower Levels (Parking/Dock/MEP) + 7 Levels Above Grade.<br>
-    <b>Amenities:</b> Public Bodega (7,000 SF), Coffeeshop (3,000 SF), Grand Spa with Central Glass-Roof Atrium Pool, Twin Towers (144 Men's / 144 Women's Beds), and Twin Rooftop Sky Decks.
+    <b>Subterranean (3 Levels):</b> Lower 3 (Data Center / MDF & Heavy MEP) + Lower 2 (Staff Hub, Breakroom, Showers & Laundry) + Lower 1 (Parking Deck & Truck Dock).<br>
+    <b>Above Grade (7 Levels):</b> Level 1 (Bodega & Coffeeshop), Level 2 (Family & Neutral Pods), Deck 3 (Thermal Spa & Glass Atrium Pool), Decks 4–7 (Twin Residential Towers w/ 288 Pods), and Twin Rooftop Sky Decks.
   </div>
 
   <script type="module">
@@ -177,11 +178,16 @@
     // Low Side: Rear Commercial Delivery Alley & Dock Apron (y = 0.0, z = -85 to -130)
     makeBox(480, 0.5, 50, 0, -0.5, -110, M.asphalt, false);
 
-    // 5. Building Massing — The 9-Level Stack
+    // 5. Building Massing — The 10-Level Stack
 
-    // LOWER 2 (Subgrade Basement: y = -10 to 0) & LOWER 1 (Banked Walkout: y = 0 to 14)
-    // Sits cut into the hillside: Footprint 320' wide × 140' deep
-    makeBox(320, 14, 140, 0, 0, 0, M.concreteRetaining, true);
+    // LOWER 3 (Deep Sub-Basement Data Center / MEP: y = -14 to -4, 10' Height)
+    makeBox(310, 10, 130, 0, -14, 0, M.podiumDarkMetal, false);
+    // Lower 3 Technical Vault Indicator (Cyan Glow Perimeter Line)
+    makeBox(312, 0.4, 132, 0, -4, 0, M.podiumLine);
+
+    // LOWER 2 (Upper Subgrade Basement - Staff Hub & Laundry: y = -4 to 0, 4' to alley / 18' below Jefferson)
+    // LOWER 1 (Banked Walkout: y = 0 to 14) — Cut into the hillside: Footprint 320' wide × 140' deep
+    makeBox(320, 18, 140, 0, -4, 0, M.concreteRetaining, true);
 
     // Lower 1 Rear Banked Elevation (Dock & Parking Entrance at z = -70, y = 0 to 14)
     // Commercial Loading Dock Opening (35' wide × 14' high)
@@ -315,6 +321,7 @@
       atrium: { name: 'GLASS SPA ATRIUM',       p: [0, 72, 50],     t: [0, 52, -10] },
       rooftop:{ name: 'TWIN SKY DECKS',         p: [-100, 120, 80], t: [-30, 90, -10] },
       dock:   { name: 'LOWER 1 DOCK & PARKING', p: [-140, 25, -160],t: [0, 15, -70] },
+      mdf:    { name: 'DATA CENTER (MDF)',      p: [-160, 8, -80],  t: [0, -4, 0] },
       side:   { name: '14\' SLOPE SECTION',     p: [-280, 50, 0],   t: [0, 45, 0] }
     };
 

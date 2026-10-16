@@ -66,9 +66,13 @@ LOWER 1:         S-2 (Enclosed Parking Garage, 65 stalls) + Delivery Loading Doc
 (Banked Walkout) Construction: Type I-A / 3-Hour Fire-Resistance Rated Podium Envelope
                  Mechanical Ventilation: 0.75 CFM/SF Continuous Exhaust per 2021 IMC § 404
 ----------------------------------------------------------------------------------------------------
-LOWER 2:         S-1 (Bulk Storage & Member Cages) + F-1 (Commercial Linen Laundry Plant)
-(Subgrade)       Central MEP Vaults (Water heating, boilers, transformers, switchgear)
-                 Construction: 12" Reinforced Concrete Foundation & Earth Retaining Walls
+LOWER 2:         B (Business - Staff Breakroom, Kitchenette & Training Hub)
+(Upper Basement) F-1 (Commercial Laundry Plant) + S-1 (Bodega Freezers & Bulk Cages)
+                 Construction: 12" Reinforced Concrete Perimeter & Foundation Walls
+----------------------------------------------------------------------------------------------------
+LOWER 3:         B (Mission-Critical Data Center / MDF Vault - 720 SF, 2-Hr Fire Envelope)
+(Deep Subgrade)  S-1 (Central Heavy MEP Switchgear, 250 kW Generator, DHW Boilers, Sump)
+                 Construction: 14" Reinforced Bedrock Keyed Foundation & Water-Stop Slab
 ====================================================================================================
 ```
 
