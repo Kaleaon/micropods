@@ -32,6 +32,7 @@ Open `dist/index.html` directly — no server needed.
   - **Zoned R-6 Multi-Family High-Density** with full block (380'-0") of NE Jefferson Avenue frontage, 0.58 miles from OSF Saint Francis Medical Center.
   - **100% Cleared Shovel-Ready Lots** ready for immediate construction with zero demolition delays.
   - **5 Municipal Water Supplies & 5 Sanitary Sewer Outfalls** for dedicated zoning load segregation (Residential West, Residential East, Commercial Laundry/BOH, Spa/Pool, and Retail/NFPA 13 Fire Riser) saving ~$200k in off-site municipal extension fees.
+  - **Opposing Towers on Widest Parcel Axis**: Siting the twin residential towers opposing each other across the 380'-0" widest frontage of the rectangular parcel (separated by the 100' central glass solarium atrium) maximizes solar gain, prevents inter-building shading, delivers unobstructed 360° sightlines, isolates structural bedrock foundations, and aligns with dual street-to-alley loading docks.
   - **10-Level Hillside Program** (3 subgrade levels: Lower 3 Data Center/Heavy MEP, Lower 2 Staff Amenities Hub/Laundry Plant, Lower 1 Parking/Loading Bay + 7 levels above grade), Men's Sento Bathhouse, Women's Sanctuary Spa, Central Glass-Roof Lap Pool Atrium, Street Bodega & Coffeeshop, and Twin Rooftop Sky Decks.
 
 ## Docs

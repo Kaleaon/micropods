@@ -284,12 +284,20 @@ deck5.addText('A-ANNO-TEXT', 317, 64, 1.4, 'PASSENGER LIFT');
 
 // CENTRAL GLASS ROOF OVER DECK 3 SPA ATRIUM (x = 160 to 220)
 deck5.addRect('A-GLAZ', 160, 15, 60, D - 30);
-deck5.addText('A-ANNO-TEXT', 170, D / 2, 2.2, 'CENTRAL GLASS ATRIUM ROOF');
-deck5.addText('A-ANNO-TEXT', 170, D / 2 - 4, 1.8, '(50\' SPA POOL BELOW)');
+deck5.addText('A-ANNO-TEXT', 165, D / 2 + 4, 2.2, 'CENTRAL GLASS ATRIUM SEPARATION');
+deck5.addText('A-ANNO-TEXT', 165, D / 2, 1.8, '(50\' SPA LAP POOL BELOW)');
+deck5.addText('A-ANNO-TEXT', 165, D / 2 - 4, 1.5, 'TOWERS SITED OPPOSING ACROSS 380\' AXIS');
 
-// Dimension Strings
-deck5.addDimension('A-ANNO-DIMS', 0, D + 5, W, D + 5, '380\'-0" (OVERALL FRONTAGE)', 5.0);
-deck5.addDimension('A-ANNO-DIMS', W + 5, 0, W + 5, D, '140\'-0" (BUILDING DEPTH)', 5.0);
+// Dimension Strings — Opposing Placement Across Widest 380' Axis
+deck5.addDimension('A-ANNO-DIMS', 0, D + 18, W, D + 18, '380\'-0" (WIDEST PARCEL AXIS - OVERALL FRONTAGE)', 5.0);
+deck5.addDimension('A-ANNO-DIMS', 0, D + 6, 160, D + 6, '160\'-0" (NORTH/WEST TOWER ANCHOR)', 4.0);
+deck5.addDimension('A-ANNO-DIMS', 160, D + 6, 220, D + 6, '60\'-0" (SOLARIUM SEPARATION)', 4.0);
+deck5.addDimension('A-ANNO-DIMS', 220, D + 6, W, D + 6, '160\'-0" (SOUTH/EAST TOWER ANCHOR)', 4.0);
+deck5.addDimension('A-ANNO-DIMS', W + 5, 0, W + 5, D, '140\'-0" (RECTANGULAR LOT DEPTH)', 5.0);
+
+// Prominent Opposing Tower Headers
+deck5.addText('A-ANNO-TEXT', 25, D - 22, 2.8, 'NORTH/WEST TOWER (WEST OPPOSING FLANK)');
+deck5.addText('A-ANNO-TEXT', 245, D - 22, 2.8, 'SOUTH/EAST TOWER (EAST OPPOSING FLANK)');
 
 // AIA Professional Title Block
 const tbX = W - 100;
@@ -298,8 +306,8 @@ deck5.addRect('A-ANNO-TTLB', tbX, tbY, 100, 35);
 deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 28, 2.8, '900 NE JEFFERSON AVE CAMPUS');
 deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 22, 2.0, 'CITY OF PEORIA, IL 61603 | ZONED R-6 PUD');
 deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 16, 2.2, 'SHEET A-102: DECK 5 RESIDENTIAL FLOOR PLAN');
-deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 10, 1.8, 'SCALE: 1/8" = 1\'-0" | CAD LAYER SPEC: AIA NCS V6');
-deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 4, 1.8, 'DATE: 2026-10-19 | TWIN 10K LB CARGO LIFTS');
+deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 10, 1.8, 'TOWERS OPPOSING ACROSS 380\' WIDEST AXIS');
+deck5.addText('A-ANNO-TTLB', tbX + 4, tbY + 4, 1.8, 'DATE: 2026-10-19 | AIA NCS V6 CAD SPEC');
 
 const deck5Path = path.join(cadOutputDir, 'campus_deck5_residential_plan.dxf');
 fs.writeFileSync(deck5Path, deck5.build(), 'utf8');

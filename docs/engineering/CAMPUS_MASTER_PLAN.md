@@ -26,6 +26,35 @@ The **900 NE Jefferson Ave** campus is engineered as a **10-level hillside urban
 5. **The Twin Residential Towers (Decks 4–7 - El. 559.0' to 599.0'):** Four dedicated sleeping levels in each tower (West: Men's Tower; East: Women's Tower) with perimeter pods and central core bathrooms.
 6. **Twin Dedicated Rooftop Terraces (Above Deck 7 - El. 599.0'):** Separate open-air sky decks for men (West: fire pits, calisthenics) and women (East: cabanas, yoga lawn).
 
+### 1B. Opposing Tower Placement Across the Widest Axis (380'-0" Frontage)
+
+The 1.49-acre property is a clean rectangle measuring **380'-0" wide (frontage along NE Jefferson Ave)** by **170'-0" deep (slope down to rear alley)**. The site planning places the twin residential towers **directly opposing each other across the 380'-0" widest dimension**:
+
+```
+<----------------------------------- 380'-0" WIDEST PARCEL AXIS ----------------------------------->
++-------------------------+-----------------------------------+-------------------------+
+|    NORTH/WEST TOWER     |      CENTRAL GLASS ATRIUM         |    SOUTH/EAST TOWER     |
+|   (WEST FLANK: 140')    |     SOLARIUM SEPARATION (100')    |   (EAST FLANK: 140')    |
+|   [Men's Res Decks 4-7] |       [Deck 3 Pool & Spa]         |  [Women's Res Decks 4-7]|
+|      CL-1 Cargo Lift    |                                   |      CL-2 Cargo Lift    |
++-------------------------+-----------------------------------+-------------------------+
+|                                  NE JEFFERSON AVENUE                                  |
+```
+
+#### Architectural Rationale for Opposing Placement on Widest Axis:
+1. **Maximum Tower Separation ($100'\text{-}0''$ Open Solarium Span):**
+   - Siting the towers at opposite extremes of the 380' widest frontage maximizes physical and visual separation ($100'$ clear span), eliminating privacy conflicts between opposing inward-facing windows.
+   - Allows natural light to penetrate the central 50' lap pool, mineral spas, and botanical gardens through the barrel-vaulted skylight from morning to evening.
+2. **Superior Solar Exposure vs. Narrow-Depth Stacking:**
+   - If the towers had been placed opposing each other across the 170' narrow depth (front-to-back), the uphill tower would cast permanent solar shadows over the downhill structure and block riverfront views.
+   - Siting across the 380' wide frontage allows both towers to harness direct Southern solar angles along Jefferson Avenue while maintaining unobstructed Northern bluff sightlines.
+3. **Civic Scale & Streetwall Bookends:**
+   - The opposing towers bookend the full urban block of NE Jefferson Avenue, framing a monumental civic streetwall with retail concourse glazing at street level and contrasting glass-roof atrium in the center.
+4. **Structural & Seismic Core Isolation:**
+   - Placing the heavy residential tower masses on opposite flanks divides structural gravity and wind lateral loads onto two independent shear-wall and pile-cap foundations anchored into native limestone bedrock, rather than concentrating loads into a single high-stress zone.
+5. **Direct Logistics Alignment:**
+   - Positions **CL-1 (North/West Cargo Lift)** and **CL-2 (South/East Cargo Lift)** directly at the opposite ends of the Lower 1 delivery dock apron, preventing cross-traffic during simultaneous pod maintenance and linen staging operations.
+
 ---
 
 ## 2. Revised 10-Level Vertical Stack & Floor Program
