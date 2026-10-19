@@ -26,7 +26,11 @@ Open `dist/index.html` directly — no server needed.
   - **Central Core Cargo Lift & Rigging Shaft** (12'W × 14'D hoistway): 10,000 lb Class C-3 freight elevator (10'×12' cab, 8' bi-parting doors) connecting Lower 1 delivery dock to all levels for 4-to-6 hour pod swap-outs.
   - **Panelized Cassette Prefabrication**: All pods break down into 5'×10' flat-pack wall, floor, and ceiling cassettes (cold-formed steel frames, cam-lock fasteners, quick-disconnect Wago/PEX harnesses) transported on wheeled A-frame carts down the 6' concourse.
   - **PDLC Smart-Glass Mirror-Windows**: Unpowered = 100% private reflective mirror; powered (12V) = transparent panoramic window overlooking the Peoria river bluffs and skyline.
-- **900 NE Jefferson Campus** (1.49-Acre Sloped Site): **10-level campus** (3 subgrade levels: Lower 3 Data Center/MEP, Lower 2 Staff Hub/Laundry, Lower 1 Parking/Dock + 7 levels above grade), Men's Sento Bathhouse, Women's Sanctuary Spa, Central Glass-Roof Lap Pool Atrium, Street Bodega & Coffeeshop, and Twin Rooftop Sky Decks.
+- **900 NE Jefferson Campus** (1.49-Acre Sloped Site, Peoria, IL 61603):
+  - **Zoned R-6 Multi-Family High-Density** with full block (380'-0") of NE Jefferson Avenue frontage, 0.58 miles from OSF Saint Francis Medical Center.
+  - **100% Cleared Shovel-Ready Lots** ready for immediate construction with zero demolition delays.
+  - **5 Municipal Water Supplies & 5 Sanitary Sewer Outfalls** for dedicated zoning load segregation (Residential West, Residential East, Commercial Laundry/BOH, Spa/Pool, and Retail/NFPA 13 Fire Riser) saving ~$200k in off-site municipal extension fees.
+  - **10-Level Hillside Program** (3 subgrade levels: Lower 3 Data Center/Heavy MEP, Lower 2 Staff Amenities Hub/Laundry Plant, Lower 1 Parking/Loading Bay + 7 levels above grade), Men's Sento Bathhouse, Women's Sanctuary Spa, Central Glass-Roof Lap Pool Atrium, Street Bodega & Coffeeshop, and Twin Rooftop Sky Decks.
 
 ## Docs
 
