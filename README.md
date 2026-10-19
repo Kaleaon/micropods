@@ -41,6 +41,8 @@ Open `dist/index.html` directly — no server needed.
   - `pod_type_a.html` — Twin Sleeping Pod blueprints & MEP notes
   - `pod_type_a_iso.html` — Standalone SVG isometric dollhouse cutaways
 - `docs/engineering/` — engineering, structural, MEP, statutory zoning & cost basis:
+  - `LIGHTING_CIRCADIAN_SPEC.md` — **3-Layer Lighting (Ambient/Task/Accent), Lux Calculations, 24-Hour Circadian Kelvin Curve & STC Acoustics**
+  - `CONTRACTOR_SPEC_SCHEDULE.md` — **CSI MasterFormat Contractor Specification Schedule, Room-by-Room Finishes, MEP Drops & GC Phasing**
   - `DATA_CENTER_STAFF_FACILITIES.md` — **Mission-Critical Server Room / MDF (8x 42U Racks, N+1 CRAC, 120 kVA UPS, Novec 1230 gas, Biometric Man-Trap) & Staff Amenities Hub (Breakroom w/ kitchenette, nap pods, locker rooms w/ showers)**
   - `ZONING_CODE_COMPLIANCE.md` — **Peoria UDC PUD, IBC 2021 (510.2 Podium), Illinois Accessibility Code (ADA), NFPA 101/13 Basis**
   - `SUITE_VARIETY_SPEC.md` — 5-Foot Modular Grid, Suite Profiles, Cargo Lift & Panelized Prefabrication
