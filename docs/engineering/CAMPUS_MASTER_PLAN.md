@@ -1,20 +1,30 @@
 # Master Plan & Architectural Basis — 900 NE Jefferson Ave
-**Urban Wellness Micro-Pod Campus | 9 Levels (2 Banked + 7 Above Grade) | Peoria, IL 61603**  
-**Date:** 2026-10-16 | **Status:** Revised Master Architectural & Programming Specification  
+**Urban Wellness Micro-Pod Campus | 10 Levels (3 Subgrade + 7 Above Grade) | Peoria, IL 61603**  
+**Date:** 2026-10-19 | **Status:** Master Architectural, Civil & Utility Specification  
 
 ---
 
-## 1. Overview & Conceptual Architecture
+## 1. Property Overview, Civil Features & Infrastructure Advantages
 
-The 900 NE Jefferson campus is engineered as a **9-level banked hillside development** on a 1.49-acre parcel (380' frontage × 170' depth) with a 14-foot natural grade fall toward the Illinois River.
+The **900 NE Jefferson Ave** campus is engineered as a **10-level hillside urban resort and multi-family micro-pod development** on a prime 1.49-acre parcel (64,904 SF) with a natural 14-foot grade fall toward the Illinois River:
 
-Based on program optimization, the building is organized into:
-1. **The Operational & Logistics Base (Lower 2 & Lower 1):** Subgrade laundry/freezers and low-side walkout parking/delivery bay.
-2. **The Street Concourse (Level 1):** Public Bodega, Coffeeshop, and Member Reception.
-3. **The All-Gender / Family Floor (Level 2):** Couples, families, executive double pods, and universal ADA suites.
-4. **The Grand Spa & Thermal Deck (Deck 3):** Spans the entire building footprint under a **soaring central glass roof**, housing the Men's Sento (West), Women's Sanctuary Spa (East), and Central Glass Atrium Pool.
-5. **The Twin Residential Towers (Decks 4–7):** Four dedicated single-gender sleeping levels in each tower (West: Men's Tower; East: Women's Tower).
-6. **Twin Dedicated Rooftop Terraces (Above Deck 7):** Separate open-air sky decks for men (West) and women (East).
+### Key Parcel Attributes:
+* **Zoning:** **R-6 Multi-Family High Density Residential** — directly supports multi-family residential density; mixed-use commercial (bodega/café) authorized under Planned Unit Development (PUD) overlay.
+* **Frontage:** **Full Block of Continuous NE Jefferson Avenue Frontage (380'-0")** × 170'-0" depth to rear alley (El. 500.0'). Provides uninterrupted street-level retail presence, prominent architecture, and multiple pedestrian portals.
+* **Site Condition:** **Cleared Lots Ready for Immediate Construction** — 100% shovel-ready with zero structural demolition, asbestos abatement, or raze permit delays.
+* **Municipal Utilities:** **Five (5) Water Supplies & Five (5) Sewer Supplies** existing along the property frontage and rear alley, enabling direct zoning load distribution (Residential West, Residential East, Commercial Laundry/BOH, Spa/Pool, and Retail/Fire Service) without costly off-site municipal main upgrades.
+* **Prime Strategic Location:** Located directly on major Peoria transit corridors, walking distance to Downtown Peoria and the Riverfront, and only **0.58 miles from OSF Saint Francis Medical Center** (the largest regional medical complex and employer in downstate Illinois).
+
+### 10-Level Building Organization:
+1. **The Subterranean Vaults (Lower 3, Lower 2 & Lower 1):**
+   - **Lower 3 (El. 480.0'):** Deep subgrade mission-critical server room / data center (MDF), 3000A switchgear, 250 kW generator, and 45,000-gal stormwater detention vault.
+   - **Lower 2 (El. 490.0'):** Staff recharge breakroom w/ commercial kitchenette & 4 nap pods, staff locker rooms w/ 4 private showers, commercial laundry plant, and wholesale bodega freezers.
+   - **Lower 1 (El. 500.0'):** Banked walkout 65-stall covered EV parking garage and commercial loading dock with 10,000 lb Cargo Lift landing.
+2. **The Street Concourse (Level 1 - El. 514.0'):** Public Bodega (7,000 SF), Specialty Coffeeshop (3,000 SF), and Hotel Lobby (8,000 SF).
+3. **The All-Gender / Family Floor (Level 2 - El. 530.0'):** Couples, families, executive double pods, and 16 universal ADA accessible suites.
+4. **The Grand Spa & Thermal Deck (Deck 3 - El. 544.0'):** Spans the entire building footprint under a **soaring central glass roof**, housing the Men's Sento (West), Women's Sanctuary Spa (East), and Central Glass Atrium Pool.
+5. **The Twin Residential Towers (Decks 4–7 - El. 559.0' to 599.0'):** Four dedicated sleeping levels in each tower (West: Men's Tower; East: Women's Tower) with perimeter pods and central core bathrooms.
+6. **Twin Dedicated Rooftop Terraces (Above Deck 7 - El. 599.0'):** Separate open-air sky decks for men (West: fire pits, calisthenics) and women (East: cabanas, yoga lawn).
 
 ---
 
