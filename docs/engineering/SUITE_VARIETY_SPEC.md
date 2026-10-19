@@ -155,19 +155,33 @@ By standardizing every module to **10', 15', or 20' exterior widths** on a const
 
 ---
 
-## 4. Central Core Heavy-Duty Cargo Lift & Rigging Hoistway
+## 4. Twin Heavy-Duty Cargo Lifts & Rigging Hoistways (North & South Towers)
 
-To ensure any pod module or sub-assembly can be delivered, installed, or swapped out during building occupancy without requiring exterior mobile cranes, the central core integrates a dedicated heavy-duty freight elevator:
+To ensure any pod module or sub-assembly can be delivered, installed, or swapped out during building occupancy without requiring exterior mobile cranes, each tower features its own dedicated **10,000 lb Class C-3 heavy-duty cargo lift**:
 
-* **Hoistway Footprint:** **12'-0" Width × 14'-0" Depth** reinforced concrete masonry unit (CMU) / structural steel shaft.
-* **Elevator Platform (Clear Cab):** **10'-0" Width × 12'-0" Depth × 10'-6" Interior Height**.
-* **Rated Capacity:** **10,000 lbs [4,535 kg]** — ASME A17.1 Class C-3 Heavy Industrial / Material Handling Freight Rating.
-* **Hoist Type:** Heavy gearless traction (or direct-acting multi-stage telescopic hydraulic piston) operating at 100 fpm with micro-leveling.
+```
+====================================================================================================
+               TWIN INDEPENDENT TOWER CARGO HOISTWAYS (NORTH & SOUTH)
+----------------------------------------------------------------------------------------------------
+  NORTH TOWER CARGO LIFT (CL-1)                 SOUTH TOWER CARGO LIFT (CL-2)
+  - Location: North Tower Core                  - Location: South Tower Core
+  - Serves: Lower 3 to Deck 7 / North Rooftop   - Serves: Lower 3 to Deck 7 / South Rooftop
+  - Lower 1: Direct North Truck Loading Bay     - Lower 1: Direct South Truck Loading Bay
+  - Residential: Decks 4-7 North Concourse      - Residential: Decks 4-7 South Concourse
+  - Zero cross-traffic through Deck 3 Spa       - Zero cross-traffic through Deck 3 Spa
+====================================================================================================
+```
+
+* **Hoistway Footprint (Each):** **12'-0" Width × 14'-0" Depth** reinforced concrete masonry unit (CMU) / structural steel shaft (2 shafts total: CL-1 North & CL-2 South).
+* **Elevator Platform (Clear Cab):** **10'-0" Width × 12'-0" Depth × 10'-6" Interior Height** in each cab.
+* **Rated Capacity:** **10,000 lbs [4,535 kg] per lift** — ASME A17.1 Class C-3 Heavy Industrial / Material Handling Freight Rating.
+* **Hoist Type:** Heavy gearless traction operating at 100–150 fpm with micro-leveling.
 * **Entrance Doors:** Counterbalanced vertical bi-parting steel freight doors with wire-glass vision panels, providing **8'-0" Width × 9'-0" Height clear opening**.
-* **Direct Logistics Alignment:**
-  * **Lower 1 Delivery Dock:** The lift opens directly to the enclosed 14-foot clearance commercial truck loading bay (Lower 1, El. 500.0').
-  * **Upper Decks (Levels 2 through 7):** The lift opens directly into the 6'-0" wide concourse circulation spine and central MEP service chase.
-* **Cargo Load Clearances:**
+* **Operational Advantages of Twin Cargo Lifts:**
+  1. **Zero Atrium Crossing:** Rigging carts, dirty laundry hampers, and heavy pod cassettes never cross the central Deck 3 Grand Spa atrium (avoiding humidity, chlorine vapors, and guest disruption).
+  2. **Simultaneous Pod Swapping:** Enables parallel turnover operations in both towers concurrently.
+  3. **100% Logistics Redundancy:** If one freight lift is taken out of service for routine inspection or active rigging, the other tower maintains full freight, laundry dispatch, and maintenance support.
+* **Cargo Load Clearances (Both Lifts):**
   * Accommodates an assembled **Pod Type B (10'×10'×10') Twin Bathroom module**.
   * Accommodates heavy wheeled A-frame rigging carts loaded with **5'×10' and 10'×10' flat-pack wall, floor, and ceiling cassettes**.
 

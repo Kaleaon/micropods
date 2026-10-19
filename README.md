@@ -23,7 +23,7 @@ Open `dist/index.html` directly — no server needed.
   - **Pod Type C** (10'W × 10'D × 10'H Executive Solo): Solo queen-width berth, 5' executive workstation desk, mini-fridge/espresso tower, and 4'×7.2' PDLC smart mirror-window.
   - **Pod Type D** (15'W × 10'D × 10'H Couples Micro-Suite): Dedicated Queen bed, loveseat breakfast banquette, vanity/desk, full hospitality credenza, and 5'×7.2' PDLC smart mirror-window.
   - **Pod Type E** (20'W × 10'D × 10'H Family Quad Bunk): Dual 2-tier bunk stacks (4 private sleeping berths with acoustic curtains), drop-leaf dining/game table, 4 lockable family lockers, and dual smart mirror-windows.
-  - **Central Core Cargo Lift & Rigging Shaft** (12'W × 14'D hoistway): 10,000 lb Class C-3 freight elevator (10'×12' cab, 8' bi-parting doors) connecting Lower 1 delivery dock to all levels for 4-to-6 hour pod swap-outs.
+  - **Twin Tower Cargo Lifts & Rigging Shafts** (Two 12'W × 14'D hoistways): Dedicated 10,000 lb Class C-3 freight elevators in each tower (CL-1 North & CL-2 South; 10'×12' cab, 8' bi-parting doors) connecting Lower 1 delivery docks to all levels for 4-to-6 hour pod swap-outs with zero cross-atrium traffic.
   - **Panelized Cassette Prefabrication**: All pods break down into 5'×10' flat-pack wall, floor, and ceiling cassettes (cold-formed steel frames, cam-lock fasteners, quick-disconnect Wago/PEX harnesses) transported on wheeled A-frame carts down the 6' concourse.
   - **PDLC Smart-Glass Mirror-Windows**: Unpowered = 100% private reflective mirror; powered (12V) = transparent panoramic window overlooking the Peoria river bluffs and skyline.
 - **900 NE Jefferson Campus** (1.49-Acre Sloped Site, Peoria, IL 61603):

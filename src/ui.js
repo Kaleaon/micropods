@@ -47,9 +47,10 @@ export function buildLabels(parent, registry) {
     ['BATH B1 (PRIVATE)', 26.5, 8.6, 5, 0.65],
     ['BATH B2 (PRIVATE)', 31.5, 8.6, 5, 0.65],
 
-    // Central Core Cargo Lift
-    ['CENTRAL CARGO LIFT · 10,000 LB', 42, 14.8, 7, 1.0],
-    ['POD CASSETTE SWAP HOISTWAY', 42, 13.5, 7, 0.7],
+    // Twin Tower Cargo Lifts (North & South)
+    ['NORTH CARGO LIFT · 10,000 LB (CL-1)', 42, 14.8, 7, 1.0],
+    ['SOUTH CARGO LIFT · 10,000 LB (CL-2)', -66, 14.8, 7, 1.0],
+    ['POD CASSETTE SWAP HOISTWAYS', 42, 13.5, 7, 0.7],
     ['WHEELED A-FRAME CASSETTE CART', 42, 3.2, 13.5, 0.65],
 
     // Concourse Hallway

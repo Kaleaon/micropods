@@ -65,15 +65,18 @@ MDF-L3       Data Center Server Rm  8x 30A 208V L6-30R PDU    Zero Water (Novec 
 
 ---
 
-## 4. Division 14: Conveying Equipment (Cargo Lift & Passenger Cars)
+## 4. Division 14: Conveying Equipment (Twin Cargo Lifts & Passenger Cars)
 
-### Hoistway H-1: Central Core Heavy Cargo Lift
-* **Application:** Pod component logistics, 4-hour panelized cassette swaps, and commercial loading.
-* **Capacity:** **10,000 lbs (4,536 kg)** | **Class C-3 Heavy Industrial Truck Loading**
-* **Cab Dimensions:** **10'-0" Clear Width × 12'-0" Clear Depth × 10'-6" Clear Height**
+### Hoistways H-CL1 & H-CL2: Twin Tower Heavy Cargo Lifts (North & South)
+* **Designation:** 
+  * **H-CL1 (North Tower Cargo Lift):** Located in North Tower core, serving Lower 3 through Deck 7 / North Rooftop. Opens directly to North loading bay on Lower 1.
+  * **H-CL2 (South Tower Cargo Lift):** Located in South Tower core, serving Lower 3 through Deck 7 / South Rooftop. Opens directly to South loading bay on Lower 1.
+* **Application:** Pod component logistics, 4-to-6 hour panelized cassette swaps, linen/laundry distribution, and heavy freight. Completely eliminates cross-atrium traffic through Deck 3 Spa.
+* **Capacity (Each):** **10,000 lbs (4,536 kg)** | **Class C-3 Heavy Industrial Truck Loading**
+* **Cab Dimensions (Each):** **10'-0" Clear Width × 12'-0" Clear Depth × 10'-6" Clear Height**
 * **Doors:** 8'-0" Clear Width × 9'-0" Clear Height Bi-Parting Vertical Telescoping Doors (Peelle or equal) with 1.5-hour fire rating.
 * **Speed:** 150 FPM Variable Frequency Traction Drive.
-* **Stops:** 10 Openings (Lower 3, Lower 2, Lower 1, Level 1, Level 2, Deck 3, Deck 4, Deck 5, Deck 6, Deck 7).
+* **Stops:** 10 Openings per lift (Lower 3, Lower 2, Lower 1, Level 1, Level 2, Deck 3, Deck 4, Deck 5, Deck 6, Deck 7).
 
 ### Hoistways H-2 & H-3: Twin Passenger Traction Elevators
 * **Capacity:** 3,500 lbs each (150 FPM MRL gearless traction).
@@ -106,6 +109,6 @@ MDF-L3       Data Center Server Rm  8x 30A 208V L6-30R PDU    Zero Water (Novec 
    - Erect structural steel frame for Twin Towers (Decks 4–7) and roof trusses for the central glass atrium.
 4. **Pod Cassette Logistics & Rigging (Month 12–14):**
    - Off-site manufactured panelized cassettes arrive via Lower 1 commercial loading bay.
-   - Hoisted via the 10,000 lb Cargo Lift to assigned floors; assembled in 4 to 6 hours per suite using cam-lock structural connections and quick-connect MEP harnesses.
+   - Hoisted via the respective tower's dedicated 10,000 lb Cargo Lift (CL-1 North or CL-2 South) directly to assigned floors; assembled in 4 to 6 hours per suite using cam-lock structural connections and quick-connect MEP harnesses without traversing the central spa deck.
 5. **Commissioning & Turnkey Handover (Month 15–16):**
    - Balance HVAC DOAS, test DALI-2 circadian lighting curves, verify Novec 1230 envelope hold time, and complete City of Peoria Certificate of Occupancy (CO) inspections.

@@ -69,8 +69,9 @@ buildFamilySuite(world, M, registry, -55, 0);
 const bathGroup = buildBathPod(world, M, 24, 0);
 registry.bathPod = bathGroup;
 
-// 6. Central Core Heavy-Duty Freight & Pod Rigging Lift (x = 36 to 48)
-buildCargoLift(world, M, registry, 36, -2);
+// 6. Twin Tower Heavy-Duty Freight & Pod Rigging Lifts (CL-1 North & CL-2 South)
+buildCargoLift(world, M, registry, 36, -2);   // North Tower Cargo Lift (CL-1)
+buildCargoLift(world, M, registry, -72, -2);  // South Tower Cargo Lift (CL-2)
 
 // 7. 6' Concourse Hallway & 5-Foot Modular Panelization Seams
 buildPanelizedSystem(world, M, registry);

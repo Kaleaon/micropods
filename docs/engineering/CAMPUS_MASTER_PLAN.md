@@ -137,17 +137,21 @@ Each gender receives their own private, open-air rooftop sanctuary overlooking t
 
 ---
 
-## 5. Central Core Heavy-Duty Cargo Lift & Rapid Pod Swap Infrastructure
+## 5. Twin Heavy-Duty Cargo Lifts & Rapid Pod Swap Infrastructure (North & South Towers)
 
-To provide 100% operational lifecycle agility and future-proof the campus against obsolescence, the central core houses an industrial-rated freight and pod rigging elevator:
+To provide 100% operational lifecycle agility and future-proof the campus against obsolescence, each tower incorporates an industrial-rated freight and pod rigging elevator:
 
-* **Hoistway Location:** Central Service Core, directly adjoining the main Lower 1 delivery loading dock (El. 500.0') and the central MEP vertical shafts.
-* **Hoistway Dimensions:** **12'-0" Width × 14'-0" Depth** masonry shaft.
-* **Elevator Platform (Clear Cab):** **10'-0" Width × 12'-0" Depth × 10'-6" Height** clear interior.
-* **Rated Capacity:** **10,000 lbs [4,535 kg]** (ASME A17.1 Class C-3 Heavy Material Handling Freight).
+* **Dual Hoistway Architecture:**
+  * **North Tower Cargo Lift (CL-1):** Located in the North Tower core, serving Lower 3 through Deck 7 / North Rooftop. Opens directly to the North commercial loading bay on Lower 1.
+  * **South Tower Cargo Lift (CL-2):** Located in the South Tower core, serving Lower 3 through Deck 7 / South Rooftop. Opens directly to the South commercial loading bay on Lower 1.
+* **Hoistway Dimensions (Each):** **12'-0" Width × 14'-0" Depth** reinforced concrete/masonry shaft.
+* **Elevator Platform (Clear Cab):** **10'-0" Width × 12'-0" Depth × 10'-6" Height** clear interior per cab.
+* **Rated Capacity:** **10,000 lbs [4,535 kg] per lift** (ASME A17.1 Class C-3 Heavy Material Handling Freight).
 * **Door Configuration:** Vertical bi-parting counterbalanced steel freight doors (**8'-0" Width × 9'-0" Clear Height**).
-* **Operational Swap Capabilities:**
-  1. **Fully Assembled Wet Core Transport:** Sized to hoist complete 10'×10'×10' Pod Type B bathroom modules (which arrive plumbed and tested).
-  2. **Panelized Cassette Transport:** Accommodates heavy wheeled A-frame transport carts bearing flat-pack 5'×10' cold-formed steel wall, floor, and ceiling cassettes.
-  3. **Continuous Occupancy Swap:** Any guest suite can be removed, upgraded, or reconfigured (e.g. converting a standard twin Pod Type A into two executive solo Pod Type C suites) via the cargo lift in **4 to 6 hours** without disrupting adjacent pods or requiring cranes.
+* **Operational Swap & Logistics Capabilities:**
+  1. **Zero Central Atrium Cross-Traffic:** Heavy pod cassettes, laundry hampers, and commercial deliveries travel vertically inside their own tower core, completely avoiding the central Deck 3 Grand Spa atrium and pool deck.
+  2. **Fully Assembled Wet Core Transport:** Sized to hoist complete 10'×10'×10' Pod Type B bathroom modules.
+  3. **Panelized Cassette Transport:** Accommodates heavy wheeled A-frame transport carts bearing flat-pack 5'×10' cold-formed steel wall, floor, and ceiling cassettes.
+  4. **Continuous Occupancy Swap:** Any guest suite can be removed, upgraded, or reconfigured (e.g. converting a standard twin Pod Type A into two executive solo Pod Type C suites) via the respective tower's cargo lift in **4 to 6 hours** without disrupting adjacent suites or requiring exterior mobile cranes.
+  5. **Operational Redundancy:** If one freight elevator is scheduled for preventative maintenance or occupied with suite turnover, the opposing tower operates at 100% freight and laundry capacity.
 

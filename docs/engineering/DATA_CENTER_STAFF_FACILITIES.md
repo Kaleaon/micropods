@@ -33,7 +33,7 @@ LEVEL 1:         STREET COMMERCIAL CONCOURSE (Sidewalk Grade - El. 514.0')
 ====================================================================================================
 LOWER 1:         BANKED WALKOUT LOGISTICS & PARKING (Rear Alley Grade - El. 500.0')
 (Banked Level)   - 65 Covered Parking Stalls (20 EV L2 / 4 DC Fast Chargers)
-                 - Enclosed Commercial Delivery Loading Dock & 10,000 lb Cargo Lift Landing
+                 - Enclosed Commercial Delivery Loading Dock w/ Dual 10,000 lb Cargo Lift Landings (CL-1 & CL-2)
                  - Automated Linen, Waste & Cardboard Compactor Rooms
 ----------------------------------------------------------------------------------------------------
 LOWER 2:         UPPER SUBGRADE BASEMENT — STAFF HUB & FACILITIES (El. 490.0')
@@ -178,7 +178,7 @@ Located in **Lower 2 (Upper Basement, El. 490.0')**, the staff hub provides dign
 * **Equipped with:** 75" commercial 4K interactive display for daily shift roll calls, hospitality training, guest service briefing, and OSHA/safety compliance meetings.
 
 ### D. Housekeeping & Operations Center (Room B2-240)
-* **Direct Logistics Route:** Located immediately adjacent to the **Commercial Laundry Plant** and the **10,000 lb Cargo Lift**.
+* **Direct Logistics Route:** Located immediately adjacent to the **Commercial Laundry Plant** with direct access to both **North Cargo Lift (CL-1)** and **South Cargo Lift (CL-2)**.
 * **Features:**
   - Automated uniform dispatch conveyor system.
   - Staging zone for 12 motorized microfiber housekeeping carts.
@@ -198,4 +198,4 @@ Located in **Lower 2 (Upper Basement, El. 490.0')**, the staff hub provides dign
 | **Staff Kitchenette Exhaust** | 300 CFM dedicated kitchen exhaust with grease hood & fire suppression | Lower 2 (Room B2-200) |
 | **Staff Locker Ventilation** | 150 CFM continuous exhaust per shower/restroom core | Lower 2 (Rooms B2-210/220) |
 | **Emergency Egress** | Two 2-hour fire-rated enclosed stairs directly to grade | East & West Core Stairwells |
-| **Freight Vertical Transport** | 10,000 lb Class C-3 Cargo Lift connecting Lower 3 through Deck 7 | Central Service Core |
+| **Freight Vertical Transport** | Twin 10,000 lb Class C-3 Cargo Lifts (CL-1 North & CL-2 South) connecting Lower 3 through Deck 7 | North & South Tower Service Cores |
