@@ -109,10 +109,15 @@ By extending **Deck 3 across the full width of the building** under a central gl
 * The West Wing houses the **Men's Sento & Bathhouse**, the East Wing houses the **Women's Sanctuary Spa**, and the center houses the **Glass-Roofed Heated Lap Pool and Solarium**, allowing shared or scheduled pool enjoyment with complete gender privacy in the bathhouses.
 * Structurally, Deck 3 acts as the **transfer podium deck** for the two residential towers rising above it.
 
-### C. Decks 4 through 7: High-Privacy Sleeping Sanctuaries
-* **West Tower (Men's Residential):** Four levels (Decks 4–7) of keycard-secured, quiet sleeping pods and private bathrooms.
-* **East Tower (Women's Residential):** Four levels (Decks 4–7) of keycard-secured, quiet sleeping pods and private bathrooms.
-* **Acoustic Separation:** Tower residents are elevated far above street noise, enjoying silent, conditioned, circadian-lit sleeping micro-suites.
+### C. Decks 4 through 7: 360-Degree Outward-Facing Sleeping Sanctuaries (Rooms on All 4 Sides)
+Both residential towers feature a **pure concentric perimeter floor plan** where sleeping suites line **ALL FOUR EXTERIOR ELEVATIONS** (North, South, East, and West):
+* **North Façades:** Rooms overlook the northern Peoria residential bluffs and historic neighborhoods.
+* **South Façades:** Rooms overlook the Illinois River valley and downstream bridges.
+* **West Façades:** Rooms overlook the Downtown Peoria skyline, sunset, and bluffs.
+* **East Façades:** Rooms overlook the central landscaped atrium solarium, sunrise, and the Illinois riverfront.
+* **100% Daylight & Privacy Guarantee:** Every sleeping pod features an exterior outward-facing wall with a full-height **PDLC smart-glass mirror-window** (100% reflective privacy mirror when unpowered; 91% transparent panoramic window when powered).
+* **360° Continuous Concourse Ring:** A 6'-0" wide continuous acoustic hallway loops entirely around the central core on all four sides.
+* **Central Core Isolation:** All private bathrooms (Pod Type B), passenger traction elevators, twin 10,000 lb Cargo Lifts (CL-1 North & CL-2 South), pressurized fire exit stairs, and MEP riser chases remain 100% clustered within the center core inside the hallway loop.
 
 ### D. Twin Private Rooftops (Above Deck 7)
 Each gender receives their own private, open-air rooftop sanctuary overlooking the Illinois River:

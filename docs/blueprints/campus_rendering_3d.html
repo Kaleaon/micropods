@@ -49,12 +49,13 @@
     <div class="badge">900 NE JEFFERSON AVE · 1.49 ACRES</div>
     <div class="badge" style="border-color:#38bdf8; color:#38bdf8;">IBC 510.2 PODIUM · 10 LEVELS</div>
     <div class="badge" style="border-color:#10b981; color:#10b981;">SUB-BASEMENT DATA CENTER (MDF)</div>
+    <div class="badge" style="border-color:#eab308; color:#ffd166;">360° OUTWARD PODS · TWIN CARGO LIFTS</div>
   </div>
   <div id="info-card">
     <h3>CAMPUS ARCHITECTURAL PERSPECTIVE (10-LEVEL STACK)</h3>
     <b>Site:</b> 1.49 Acres (380' frontage × 170' depth) on 14' sloped hillside.<br>
     <b>Subterranean (3 Levels):</b> Lower 3 (Data Center / MDF & Heavy MEP) + Lower 2 (Staff Hub, Breakroom, Showers & Laundry) + Lower 1 (Parking Deck & Truck Dock).<br>
-    <b>Above Grade (7 Levels):</b> Level 1 (Bodega & Coffeeshop), Level 2 (Family & Neutral Pods), Deck 3 (Thermal Spa & Glass Atrium Pool), Decks 4–7 (Twin Residential Towers w/ 288 Pods), and Twin Rooftop Sky Decks.
+    <b>Above Grade (7 Levels):</b> Level 1 (Bodega & Coffeeshop), Level 2 (Family & Neutral Pods), Deck 3 (Thermal Spa & Glass Atrium Pool), Decks 4–7 (Twin Towers w/ 360° outward-facing pods on all 4 elevations & twin 10K lb cargo lifts CL-1/CL-2), and Twin Rooftop Sky Decks.
   </div>
 
   <script type="module">
@@ -246,14 +247,20 @@
     // East Tower (Women's Residential): x = +45 to +150 (Width 105' × Depth 110')
     makeBox(105, 40, 110, 97.5, 52, -10, M.towerFacade, true);
 
-    // Perimeter Sleeping Pod Window Bands with PDLC Smart Glass
+    // Perimeter Sleeping Pod Window Bands with PDLC Smart Glass (4 Elevations: North, South, East, West)
     [56, 66, 76, 86].forEach(ly => {
-      // West Tower Windows (Front & Rear)
-      makeBox(95, 6, 1.5, -97.5, ly, 46, M.pdlcGlass);
-      makeBox(95, 6, 1.5, -97.5, ly, -66, M.pdlcGlass);
-      // East Tower Windows (Front & Rear)
-      makeBox(95, 6, 1.5, 97.5, ly, 46, M.pdlcGlass);
-      makeBox(95, 6, 1.5, 97.5, ly, -66, M.pdlcGlass);
+      // West Tower Windows (North, South, West exterior, East atrium-facing)
+      makeBox(95, 6, 1.5, -97.5, ly, 46, M.pdlcGlass);   // South (Jefferson Ave)
+      makeBox(95, 6, 1.5, -97.5, ly, -66, M.pdlcGlass);  // North (Bluff rear)
+      makeBox(1.5, 6, 95, -150.5, ly, -10, M.pdlcGlass); // West (Downtown skyline)
+      makeBox(1.5, 6, 95, -44.5, ly, -10, M.pdlcGlass);  // East (Inner Solarium Atrium)
+
+      // East Tower Windows (North, South, West atrium-facing, East exterior)
+      makeBox(95, 6, 1.5, 97.5, ly, 46, M.pdlcGlass);    // South (Jefferson Ave)
+      makeBox(95, 6, 1.5, 97.5, ly, -66, M.pdlcGlass);   // North (Bluff rear)
+      makeBox(1.5, 6, 95, 44.5, ly, -10, M.pdlcGlass);   // West (Inner Solarium Atrium)
+      makeBox(1.5, 6, 95, 150.5, ly, -10, M.pdlcGlass);  // East (Sunrise / Riverfront)
+
       // Architectural Spandrel Bands
       makeBox(106, 3.8, 111, -97.5, ly + 6, -10, M.spandrelBronze);
       makeBox(106, 3.8, 111, 97.5, ly + 6, -10, M.spandrelBronze);
@@ -262,6 +269,10 @@
     // Central Core Service & Elevator Towers (Rising through both towers)
     makeBox(30, 48, 40, -97.5, 52, -10, M.podiumDarkMetal); // West Core
     makeBox(30, 48, 40, 97.5, 52, -10, M.podiumDarkMetal);  // East Core
+
+    // Twin 10,000 lb Cargo Hoistway Enclosures (CL-1 North & CL-2 South)
+    makeBox(14, 52, 16, -97.5, 52, -35, M.podiumDarkMetal); // North Hoistway (CL-1)
+    makeBox(14, 52, 16, 97.5, 52, 15, M.podiumDarkMetal);   // South Hoistway (CL-2)
 
     // 6. TWIN ROOFTOPS (Above Deck 7: y = 92)
     // West Rooftop (Men's Sky Deck)

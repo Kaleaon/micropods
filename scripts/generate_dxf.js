@@ -146,62 +146,146 @@ for (let i = 0; i <= 9; i++) {
   deck5.addText('A-ANNO-TEXT', -23.5, gy - 1.5, 3.0, letter);
 });
 
-// NORTH TOWER (West Wing: x = 10 to 170)
-// Exterior Sleeping Pods (North Perimeter, 10' deep)
-for (let x = 15; x < 165; x += 20) {
+// =============================================================
+// NORTH TOWER (West Wing: x = 0 to 160, y = 0 to 140)
+// ALL 4 SIDES HAVE OUTWARD-FACING SLEEPING PODS & SMART GLASS
+// =============================================================
+
+// 1. North Façade Pods (y = 130 to 140, x = 10 to 150) — Facing North
+for (let x = 10; x < 150; x += 20) {
   deck5.addRect('A-WALL-INTR', x, D - 10.83, 20, 10);
-  // PDLC Smart-Glass Mirror-Window along exterior
-  deck5.addLine('A-GLAZ', x + 2, D - 0.83, x + 18, D - 0.83);
-  // Door to concourse
+  deck5.addLine('A-GLAZ', x + 2, D - 0.83, x + 18, D - 0.83); // Smart glass North
   deck5.addLine('A-DOOR', x + 2, D - 10.83, x + 5, D - 10.83);
   deck5.addArc('A-DOOR', x + 2, D - 10.83, 3.0, 270, 360);
-  deck5.addText('A-ANNO-TEXT', x + 4, D - 6.5, 1.8, 'POD A (20\')');
+  deck5.addText('A-ANNO-TEXT', x + 4, D - 6.5, 1.6, 'POD (NORTH)');
 }
-// Exterior Sleeping Pods (South Perimeter, 10' deep)
-for (let x = 15; x < 165; x += 20) {
+
+// 2. South Façade Pods (y = 0 to 10, x = 10 to 150) — Facing South
+for (let x = 10; x < 150; x += 20) {
+  deck5.addRect('A-WALL-INTR', x, 0.83, 20, 10);
+  deck5.addLine('A-GLAZ', x + 2, 0.83, x + 18, 0.83); // Smart glass South
+  deck5.addLine('A-DOOR', x + 2, 10.83, x + 5, 10.83);
+  deck5.addArc('A-DOOR', x + 2, 10.83, 3.0, 0, 90);
+  deck5.addText('A-ANNO-TEXT', x + 4, 5.5, 1.6, 'POD (SOUTH)');
+}
+
+// 3. West Façade Pods (x = 0 to 10, y = 15 to 125) — Facing West (Downtown/Bluffs)
+for (let y = 15; y < 125; y += 20) {
+  deck5.addRect('A-WALL-INTR', 0.83, y, 10, 20);
+  deck5.addLine('A-GLAZ', 0.83, y + 2, 0.83, y + 18); // Smart glass West
+  deck5.addLine('A-DOOR', 10.83, y + 2, 10.83, y + 5);
+  deck5.addArc('A-DOOR', 10.83, y + 2, 3.0, 90, 180);
+  deck5.addText('A-ANNO-TEXT', 2.0, y + 9.0, 1.4, 'POD (WEST)');
+}
+
+// 4. East Façade Pods (x = 150 to 160, y = 15 to 125) — Facing East (Atrium/Garden)
+for (let y = 15; y < 125; y += 20) {
+  deck5.addRect('A-WALL-INTR', 149.17, y, 10, 20);
+  deck5.addLine('A-GLAZ', 159.17, y + 2, 159.17, y + 18); // Smart glass East
+  deck5.addLine('A-DOOR', 149.17, y + 2, 149.17, y + 5);
+  deck5.addArc('A-DOOR', 149.17, y + 2, 3.0, 0, 90);
+  deck5.addText('A-ANNO-TEXT', 151.0, y + 9.0, 1.4, 'POD (EAST)');
+}
+
+// 360° Continuous Concourse Hallway (6'-0" wide loop around North Core)
+deck5.addRect('A-WALL-INTR', 16.83, 16.83, 126.34, D - 33.66);
+
+// North Tower Central Core (Inside x = 16.83 to 143.17, y = 16.83 to 123.17)
+// Standalone Bathrooms (Pod Type B) clustered in core
+for (let bx = 25; bx < 135; bx += 25) {
+  deck5.addRect('A-FLOR-FIXT', bx, 25, 20, 10);
+  deck5.addText('A-ANNO-TEXT', bx + 2, 30, 1.4, 'BATH CORE B');
+  deck5.addRect('A-FLOR-FIXT', bx, D - 35, 20, 10);
+  deck5.addText('A-ANNO-TEXT', bx + 2, D - 30, 1.4, 'BATH CORE B');
+}
+
+// CL-1 Cargo Lift (North Tower Core): 12'W x 14'D Hoistway
+deck5.addRect('A-ELEV-CARGO', 74, 55, 12, 14);
+deck5.addRect('A-ELEV-CARGO', 75, 56, 10, 12);
+deck5.addLine('A-ELEV-CARGO', 75, 56, 85, 68);
+deck5.addLine('A-ELEV-CARGO', 75, 68, 85, 56);
+deck5.addText('A-ANNO-TEXT', 70, 50, 1.8, 'CL-1 CARGO LIFT (10,000 LB)');
+
+// Pressurized Fire Stairwell 1
+deck5.addRect('A-WALL-INTR', 50, 55, 14, 20);
+deck5.addText('A-ANNO-TEXT', 51, 64, 1.4, 'EXIT STAIR 1');
+
+// Passenger Elevator Core
+deck5.addRect('A-WALL-INTR', 96, 55, 14, 20);
+deck5.addText('A-ANNO-TEXT', 97, 64, 1.4, 'PASSENGER LIFT');
+
+
+// =============================================================
+// SOUTH TOWER (East Wing: x = 220 to 380, y = 0 to 140)
+// ALL 4 SIDES HAVE OUTWARD-FACING SLEEPING PODS & SMART GLASS
+// =============================================================
+
+// 1. North Façade Pods (y = 130 to 140, x = 230 to 370) — Facing North
+for (let x = 230; x < 370; x += 20) {
+  deck5.addRect('A-WALL-INTR', x, D - 10.83, 20, 10);
+  deck5.addLine('A-GLAZ', x + 2, D - 0.83, x + 18, D - 0.83);
+  deck5.addLine('A-DOOR', x + 2, D - 10.83, x + 5, D - 10.83);
+  deck5.addArc('A-DOOR', x + 2, D - 10.83, 3.0, 270, 360);
+  deck5.addText('A-ANNO-TEXT', x + 4, D - 6.5, 1.6, 'POD (NORTH)');
+}
+
+// 2. South Façade Pods (y = 0 to 10, x = 230 to 370) — Facing South
+for (let x = 230; x < 370; x += 20) {
   deck5.addRect('A-WALL-INTR', x, 0.83, 20, 10);
   deck5.addLine('A-GLAZ', x + 2, 0.83, x + 18, 0.83);
   deck5.addLine('A-DOOR', x + 2, 10.83, x + 5, 10.83);
   deck5.addArc('A-DOOR', x + 2, 10.83, 3.0, 0, 90);
-  deck5.addText('A-ANNO-TEXT', x + 4, 5.5, 1.8, 'POD A (20\')');
+  deck5.addText('A-ANNO-TEXT', x + 4, 5.5, 1.6, 'POD (SOUTH)');
 }
 
-// 6'-0" Continuous Acoustic Concourse Hallways
-deck5.addLine('A-WALL-INTR', 10, D - 16.83, 170, D - 16.83);
-deck5.addLine('A-WALL-INTR', 10, 16.83, 170, 16.83);
-
-// North Tower Central Core (Bathrooms, MEP & CL-1 Cargo Lift)
-deck5.addRect('A-WALL-INTR', 20, 22.83, 140, D - 45.66);
-// Twin Cargo Lift CL-1 (North Tower): 12'W x 14'D hoistway
-deck5.addRect('A-ELEV-CARGO', 80, 50, 12, 14);
-deck5.addRect('A-ELEV-CARGO', 81, 51, 10, 12);
-deck5.addLine('A-ELEV-CARGO', 81, 51, 91, 63); // diagonal cross for elevator
-deck5.addLine('A-ELEV-CARGO', 81, 63, 91, 51);
-deck5.addText('A-ANNO-TEXT', 78, 45, 2.0, 'CL-1 CARGO LIFT (10,000 LB)');
-
-// SOUTH TOWER (East Wing: x = 210 to 370)
-for (let x = 215; x < 365; x += 20) {
-  deck5.addRect('A-WALL-INTR', x, D - 10.83, 20, 10);
-  deck5.addLine('A-GLAZ', x + 2, D - 0.83, x + 18, D - 0.83);
-  deck5.addText('A-ANNO-TEXT', x + 4, D - 6.5, 1.8, 'POD A (20\')');
+// 3. West Façade Pods (x = 220 to 230, y = 15 to 125) — Facing West (Atrium/Garden)
+for (let y = 15; y < 125; y += 20) {
+  deck5.addRect('A-WALL-INTR', 220.83, y, 10, 20);
+  deck5.addLine('A-GLAZ', 220.83, y + 2, 220.83, y + 18);
+  deck5.addLine('A-DOOR', 230.83, y + 2, 230.83, y + 5);
+  deck5.addArc('A-DOOR', 230.83, y + 2, 3.0, 90, 180);
+  deck5.addText('A-ANNO-TEXT', 222.0, y + 9.0, 1.4, 'POD (WEST)');
 }
-for (let x = 215; x < 365; x += 20) {
-  deck5.addRect('A-WALL-INTR', x, 0.83, 20, 10);
-  deck5.addLine('A-GLAZ', x + 2, 0.83, x + 18, 0.83);
-  deck5.addText('A-ANNO-TEXT', x + 4, 5.5, 1.8, 'POD A (20\')');
-}
-// South Tower Central Core w/ CL-2 Cargo Lift
-deck5.addRect('A-WALL-INTR', 220, 22.83, 140, D - 45.66);
-deck5.addRect('A-ELEV-CARGO', 280, 50, 12, 14);
-deck5.addRect('A-ELEV-CARGO', 281, 51, 10, 12);
-deck5.addLine('A-ELEV-CARGO', 281, 51, 291, 63);
-deck5.addLine('A-ELEV-CARGO', 281, 63, 291, 51);
-deck5.addText('A-ANNO-TEXT', 278, 45, 2.0, 'CL-2 CARGO LIFT (10,000 LB)');
 
-// CENTRAL GLASS ROOF OVER DECK 3 SPA ATRIUM (x = 170 to 210)
-deck5.addRect('A-GLAZ', 170, 15, 40, D - 30);
-deck5.addText('A-ANNO-TEXT', 175, D / 2, 2.2, 'CENTRAL GLASS ATRIUM ROOF');
-deck5.addText('A-ANNO-TEXT', 175, D / 2 - 4, 1.8, '(50\' SPA POOL BELOW)');
+// 4. East Façade Pods (x = 370 to 380, y = 15 to 125) — Facing East (Evans St/Bluffs)
+for (let y = 15; y < 125; y += 20) {
+  deck5.addRect('A-WALL-INTR', 369.17, y, 10, 20);
+  deck5.addLine('A-GLAZ', 379.17, y + 2, 379.17, y + 18);
+  deck5.addLine('A-DOOR', 369.17, y + 2, 369.17, y + 5);
+  deck5.addArc('A-DOOR', 369.17, y + 2, 3.0, 0, 90);
+  deck5.addText('A-ANNO-TEXT', 371.0, y + 9.0, 1.4, 'POD (EAST)');
+}
+
+// 360° Continuous Concourse Hallway (6'-0" wide loop around South Core)
+deck5.addRect('A-WALL-INTR', 236.83, 16.83, 126.34, D - 33.66);
+
+// South Tower Central Core (Inside x = 236.83 to 363.17, y = 16.83 to 123.17)
+for (let bx = 245; bx < 355; bx += 25) {
+  deck5.addRect('A-FLOR-FIXT', bx, 25, 20, 10);
+  deck5.addText('A-ANNO-TEXT', bx + 2, 30, 1.4, 'BATH CORE B');
+  deck5.addRect('A-FLOR-FIXT', bx, D - 35, 20, 10);
+  deck5.addText('A-ANNO-TEXT', bx + 2, D - 30, 1.4, 'BATH CORE B');
+}
+
+// CL-2 Cargo Lift (South Tower Core): 12'W x 14'D Hoistway
+deck5.addRect('A-ELEV-CARGO', 294, 55, 12, 14);
+deck5.addRect('A-ELEV-CARGO', 295, 56, 10, 12);
+deck5.addLine('A-ELEV-CARGO', 295, 56, 305, 68);
+deck5.addLine('A-ELEV-CARGO', 295, 68, 305, 56);
+deck5.addText('A-ANNO-TEXT', 290, 50, 1.8, 'CL-2 CARGO LIFT (10,000 LB)');
+
+// Pressurized Fire Stairwell 2
+deck5.addRect('A-WALL-INTR', 270, 55, 14, 20);
+deck5.addText('A-ANNO-TEXT', 271, 64, 1.4, 'EXIT STAIR 2');
+
+// Passenger Elevator Core
+deck5.addRect('A-WALL-INTR', 316, 55, 14, 20);
+deck5.addText('A-ANNO-TEXT', 317, 64, 1.4, 'PASSENGER LIFT');
+
+// CENTRAL GLASS ROOF OVER DECK 3 SPA ATRIUM (x = 160 to 220)
+deck5.addRect('A-GLAZ', 160, 15, 60, D - 30);
+deck5.addText('A-ANNO-TEXT', 170, D / 2, 2.2, 'CENTRAL GLASS ATRIUM ROOF');
+deck5.addText('A-ANNO-TEXT', 170, D / 2 - 4, 1.8, '(50\' SPA POOL BELOW)');
 
 // Dimension Strings
 deck5.addDimension('A-ANNO-DIMS', 0, D + 5, W, D + 5, '380\'-0" (OVERALL FRONTAGE)', 5.0);
