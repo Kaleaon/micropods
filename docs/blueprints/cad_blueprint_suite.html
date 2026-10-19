@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MicroPod Campus — Professional Architectural CAD Blueprint Suite (ARCH D 36"×24")</title>
+<style>
+  :root {
+    --cad-bg: #0b2240;
+    --cad-paper: #081a33;
+    --cad-grid: rgba(64, 130, 204, 0.25);
+    --cad-border: #ffffff;
+    --cad-text: #ffffff;
+    --cad-dim: #f472b6;
+    --cad-wall-extr: #ffffff;
+    --cad-wall-intr: #ffd166;
+    --cad-door: #38bdf8;
+    --cad-glaz: #60a5fa;
+    --cad-fixt: #4ade80;
+    --cad-cargo: #ef4444;
+  }
+
+  body.theme-white {
+    --cad-bg: #e2e8f0;
+    --cad-paper: #ffffff;
+    --cad-grid: rgba(148, 163, 184, 0.25);
+    --cad-border: #0f172a;
+    --cad-text: #0f172a;
+    --cad-dim: #db2777;
+    --cad-wall-extr: #0f172a;
+    --cad-wall-intr: #d97706;
+    --cad-door: #0284c7;
+    --cad-glaz: #2563eb;
+    --cad-fixt: #16a34a;
+    --cad-cargo: #dc2626;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: "Courier New", Courier, monospace;
+    background: var(--cad-bg);
+    color: var(--cad-text);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    user-select: none;
+  }
+
+  /* TOP CAD CONTROL BAR */
+  header {
+    background: #061528;
+    border-bottom: 2px solid #204571;
+    padding: 10px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    z-index: 100;
+  }
+  .title-block {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .badge {
+    background: #ffd166;
+    color: #0b1a2e;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 3px 7px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+  }
+  h1 {
+    font-size: 15px;
+    margin: 0;
+    letter-spacing: 1.5px;
+    color: #fff;
+  }
+  .cad-tools {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  button, select {
+    background: #11335b;
+    color: #fff;
+    border: 1px solid #4a82bf;
+    padding: 6px 12px;
+    font-family: inherit;
+    font-size: 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  button:hover, select:hover { background: #1c4d87; border-color: #ffd166; }
+  button.active { background: #ffd166; color: #0b1a2e; font-weight: bold; border-color: #fff; }
+  button.btn-dxf { background: #10b981; color: #fff; font-weight: bold; border-color: #34d399; }
+  button.btn-dxf:hover { background: #059669; }
+
+  /* MAIN WORKSPACE */
+  .workspace {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* SIDEBAR: LAYER MANAGER & METADATA */
+  .sidebar {
+    width: 280px;
+    background: #081a33;
+    border-right: 2px solid #204571;
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    transition: transform 0.2s ease;
+  }
+  .sidebar-header {
+    background: #0e294d;
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #204571;
+    color: #ffd166;
+    display: flex;
+    justify-content: space-between;
+  }
+  .sidebar-body {
+    padding: 14px;
+    overflow-y: auto;
+    font-size: 12px;
+    flex: 1;
+  }
+  .layer-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  .layer-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.4);
+  }
+  .info-group {
+    margin-top: 18px;
+    border-top: 1px dashed #28548a;
+    padding-top: 12px;
+  }
+  .info-group h4 {
+    margin: 0 0 6px 0;
+    font-size: 11px;
+    color: #93c5fd;
+    letter-spacing: 1px;
+  }
+  .info-group p {
+    margin: 0 0 6px 0;
+    font-size: 11px;
+    line-height: 1.5;
+    color: #cbd5e1;
+  }
+
+  /* VIEWPORT & SVG CANVAS */
+  .viewport {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    background: radial-gradient(circle at center, var(--cad-bg) 0%, #05101f 100%);
+  }
+  .viewport.measuring { cursor: crosshair; }
+  .viewport.panning { cursor: grabbing; }
+
+  #blueprint-container {
+    transform-origin: 0 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  }
+
+  /* ARCH D SHEET STYLING: 36in x 24in (Aspect 3:2 -> 3600 x 2400 units) */
+  svg.arch-d-sheet {
+    display: block;
+    width: 1800px;
+    height: 1200px;
+    background: var(--cad-paper);
+    border: 2px solid var(--cad-border);
+  }
+
+  /* MEASUREMENT OVERLAY HUD */
+  .hud-measure {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(6, 21, 40, 0.9);
+    border: 1px solid #ffd166;
+    padding: 8px 14px;
+    font-size: 12px;
+    border-radius: 4px;
+    color: #ffd166;
+    pointer-events: none;
+    display: none;
+    z-index: 50;
+  }
+
+  /* FOOTER SCALE & COORDINATES */
+  footer {
+    background: #061528;
+    border-top: 1px solid #204571;
+    padding: 4px 16px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #94a3b8;
+    z-index: 100;
+  }
+
+  /* PRINT FORMATTING: TRUE ARCH D 36" x 24" */
+  @media print {
+    header, .sidebar, footer, .hud-measure { display: none !important; }
+    body, .workspace, .viewport { overflow: visible !important; background: #fff !important; }
+    #blueprint-container { position: static !important; transform: none !important; box-shadow: none !important; }
+    svg.arch-d-sheet { width: 100% !important; height: auto !important; border: none !important; }
+    @page { size: 36in 24in landscape; margin: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="title-block">
+    <span class="badge">AIA CAD SPEC</span>
+    <h1>MICRO-POD CAMPUS & WELLNESS RESORT &nbsp;|&nbsp; 900 NE JEFFERSON AVE, PEORIA, IL</h1>
+  </div>
+  <div class="cad-tools">
+    <label style="font-size:12px; color:#cbd5e1;">SHEET:</label>
+    <select id="sheet-select" onchange="switchSheet(this.value)">
+      <option value="A101">A-101: 10-LEVEL HILLSIDE SECTION & ELEVATION</option>
+      <option value="A102" selected>A-102: DECK 5 RESIDENTIAL PLAN (TWIN CARGO LIFTS)</option>
+      <option value="A103">A-103: DECK 3 GRAND SPA & GLASS ATRIUM</option>
+      <option value="A104">A-104: LEVEL 1 COMMERCIAL CONCOURSE & BODEGA</option>
+      <option value="A105">A-105: LOWER 2 & 3 SUBGRADE DATA CENTER & STAFF</option>
+      <option value="A106">A-106: ENLARGED SUITE MODULES & CASSETTE DETAILS</option>
+    </select>
+    <button onclick="toggleTheme()" id="btn-theme">BLUEPRINT MODE</button>
+    <button onclick="toggleMeasure()" id="btn-measure">📏 CALIPER MEASURE</button>
+    <button onclick="resetView()">RESET VIEW (100%)</button>
+    <button class="btn-dxf" onclick="downloadCurrentDxf()">⬇ EXPORT AUTOCAD .DXF</button>
+    <button onclick="window.print()">🖨 PRINT ARCH D (36"×24")</button>
+  </div>
+</header>
+
+<div class="workspace">
+  <!-- SIDEBAR: AIA CAD LAYER MANAGER -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span>AIA CAD LAYERS</span>
+      <span style="font-size:10px; color:#93c5fd;">CLICK TO TOGGLE</span>
+    </div>
+    <div class="sidebar-body">
+      <div class="layer-item" onclick="toggleLayer('A-WALL-EXTR')">
+        <input type="checkbox" id="chk-A-WALL-EXTR" checked>
+        <div class="layer-color" style="background:var(--cad-wall-extr);"></div>
+        <span>A-WALL-EXTR (Exterior 10")</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-WALL-INTR')">
+        <input type="checkbox" id="chk-A-WALL-INTR" checked>
+        <div class="layer-color" style="background:var(--cad-wall-intr);"></div>
+        <span>A-WALL-INTR (Partitions 6")</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-DOOR')">
+        <input type="checkbox" id="chk-A-DOOR" checked>
+        <div class="layer-color" style="background:var(--cad-door);"></div>
+        <span>A-DOOR (Swings & Sliders)</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-GLAZ')">
+        <input type="checkbox" id="chk-A-GLAZ" checked>
+        <div class="layer-color" style="background:var(--cad-glaz);"></div>
+        <span>A-GLAZ (PDLC Smart Glass)</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-FLOR-FIXT')">
+        <input type="checkbox" id="chk-A-FLOR-FIXT" checked>
+        <div class="layer-color" style="background:var(--cad-fixt);"></div>
+        <span>A-FLOR-FIXT (Casework & Bunks)</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-ELEV-CARGO')">
+        <input type="checkbox" id="chk-A-ELEV-CARGO" checked>
+        <div class="layer-color" style="background:var(--cad-cargo);"></div>
+        <span>A-ELEV-CARGO (Twin 10K Lifts)</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-GRID')">
+        <input type="checkbox" id="chk-A-GRID" checked>
+        <div class="layer-color" style="background:#94a3b8;"></div>
+        <span>A-GRID (Column Grid 1-10)</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-ANNO-DIMS')">
+        <input type="checkbox" id="chk-A-ANNO-DIMS" checked>
+        <div class="layer-color" style="background:var(--cad-dim);"></div>
+        <span>A-ANNO-DIMS (Dimension Strings)</span>
+      </div>
+      <div class="layer-item" onclick="toggleLayer('A-ANNO-TEXT')">
+        <input type="checkbox" id="chk-A-ANNO-TEXT" checked>
+        <div class="layer-color" style="background:#f8fafc;"></div>
+        <span>A-ANNO-TEXT (Room Tags & Data)</span>
+      </div>
+
+      <div class="info-group">
+        <h4>SHEET DATA BLOCK</h4>
+        <p><b>PARCEL:</b> 900 NE Jefferson Ave, Peoria, IL 61603 (1.49 Acres / 64,904 SF)</p>
+        <p><b>ZONING:</b> R-6 Multi-Family High Density (PUD Mixed-Use Overlay)</p>
+        <p><b>FRONTAGE:</b> 380'-0" Full Block × 170'-0" Depth (14' Grade Fall)</p>
+        <p><b>UTILITIES:</b> 5 Water Taps (W1-W5) & 5 Sewer Laterals (S1-S5)</p>
+        <p><b>FREIGHT:</b> Twin 10,000 lb Class C-3 Cargo Lifts (CL-1 North & CL-2 South)</p>
+      </div>
+
+      <div class="info-group">
+        <h4>HOTEL / SUITE COUNTS</h4>
+        <p><b>TOTAL SLEEPING PODS:</b> 336 Pods</p>
+        <p>• West Men's Tower: 144 Pods</p>
+        <p>• East Women's Tower: 144 Pods</p>
+        <p>• Level 2 Family/Neutral: 48 Pods</p>
+        <p><b>PRIVATE CORE BATHS:</b> 184 Bathrooms</p>
+      </div>
+    </div>
+  </aside>
+
+  <!-- VIEWPORT CANVAS -->
+  <main class="viewport" id="viewport">
+    <div id="blueprint-container">
+      <svg id="cad-svg" class="arch-d-sheet" viewBox="0 0 1800 1200" xmlns="http://www.w3.org/2000/svg" font-family="'Courier New', monospace">
+        <!-- DEFINITIONS: HATCH PATTERNS & STAMPS -->
+        <defs>
+          <pattern id="cadGrid" width="30" height="30" patternUnits="userSpaceOnUse">
+            <rect width="30" height="30" fill="none" stroke="var(--cad-grid)" stroke-width="0.5"/>
+          </pattern>
+          <pattern id="concreteHatch" width="10" height="10" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="10" stroke="#718096" stroke-width="0.8"/>
+          </pattern>
+        </defs>
+
+        <!-- BACKGROUND CAD GRID -->
+        <rect width="1800" height="1200" fill="url(#cadGrid)"/>
+
+        <!-- SHEET BORDER (ARCH D: 36" x 24" at 50px/inch) -->
+        <rect x="30" y="30" width="1740" height="1140" fill="none" stroke="var(--cad-border)" stroke-width="3"/>
+        <rect x="40" y="40" width="1720" height="1120" fill="none" stroke="var(--cad-border)" stroke-width="1"/>
+
+        <!-- ============================================================= -->
+        <!-- AIA TITLE BLOCK (BOTTOM-RIGHT CORNER) -->
+        <!-- ============================================================= -->
+        <g id="layer-A-ANNO-TTLB">
+          <rect x="1280" y="940" width="470" height="210" fill="var(--cad-paper)" stroke="var(--cad-border)" stroke-width="2"/>
+          <line x1="1280" y1="985" x2="1750" y2="985" stroke="var(--cad-border)" stroke-width="1"/>
+          <line x1="1280" y1="1030" x2="1750" y2="1030" stroke="var(--cad-border)" stroke-width="1"/>
+          <line x1="1280" y1="1090" x2="1750" y2="1090" stroke="var(--cad-border)" stroke-width="1"/>
+          <line x1="1560" y1="1030" x2="1560" y2="1150" stroke="var(--cad-border)" stroke-width="1"/>
+
+          <!-- Title Text -->
+          <text x="1300" y="965" fill="var(--cad-text)" font-size="14" font-weight="bold" letter-spacing="1">MICRO-POD CAMPUS & WELLNESS CLUB</text>
+          <text x="1300" y="978" fill="#93c5fd" font-size="10">900 NE JEFFERSON AVE, PEORIA, IL 61603 · 1.49 ACRE SITE</text>
+
+          <text x="1300" y="1008" fill="#ffd166" font-size="12" font-weight="bold" id="sheet-title-text">SHEET A-102: DECK 5 RESIDENTIAL FLOOR PLAN</text>
+          <text x="1300" y="1022" fill="#cbd5e1" font-size="9">CONCENTRIC SUITES · TWIN 10K LB CARGO LIFTS (CL-1 & CL-2) · SMART GLASS</text>
+
+          <text x="1300" y="1050" fill="#93c5fd" font-size="9">SCALE: 1/8" = 1'-0"</text>
+          <text x="1300" y="1068" fill="#93c5fd" font-size="9">DATE: 2026-10-19</text>
+          <text x="1300" y="1084" fill="#93c5fd" font-size="9">ZONING: R-6 MULTI-FAMILY (PUD)</text>
+
+          <!-- Sheet Number Box -->
+          <text x="1655" y="1065" fill="#ffd166" font-size="28" font-weight="bold" text-anchor="middle" id="sheet-num-text">A-102</text>
+          <text x="1655" y="1082" fill="#93c5fd" font-size="9" text-anchor="middle">REV: 04 (TWIN LIFTS)</text>
+
+          <!-- PE / AIA Stamp Box -->
+          <rect x="1575" y="1098" width="160" height="44" fill="none" stroke="#ffd166" stroke-dasharray="4,2"/>
+          <text x="1655" y="1124" fill="#ffd166" font-size="9" text-anchor="middle" font-weight="bold">[ PE / AIA STAMP SPACE ]</text>
+
+          <!-- Graphic Scale Bar -->
+          <g transform="translate(1300, 1115)">
+            <rect x="0" y="0" width="40" height="6" fill="#fff"/>
+            <rect x="40" y="0" width="40" height="6" fill="#000" stroke="#fff" stroke-width="0.5"/>
+            <rect x="80" y="0" width="40" height="6" fill="#fff"/>
+            <rect x="120" y="0" width="40" height="6" fill="#000" stroke="#fff" stroke-width="0.5"/>
+            <text x="0" y="16" fill="var(--cad-text)" font-size="8">0'</text>
+            <text x="40" y="16" fill="var(--cad-text)" font-size="8">10'</text>
+            <text x="80" y="16" fill="var(--cad-text)" font-size="8">20'</text>
+            <text x="120" y="16" fill="var(--cad-text)" font-size="8">30'</text>
+            <text x="160" y="16" fill="var(--cad-text)" font-size="8">40'</text>
+          </g>
+        </g>
+
+        <!-- NORTH ARROW -->
+        <g transform="translate(1700, 100)">
+          <circle cx="0" cy="0" r="24" fill="none" stroke="var(--cad-border)" stroke-width="1.5"/>
+          <polygon points="0,-22 8,6 0,0" fill="#ffd166"/>
+          <polygon points="0,-22 -8,6 0,0" fill="#fff"/>
+          <text x="0" y="-28" fill="#ffd166" font-size="12" font-weight="bold" text-anchor="middle">N</text>
+          <text x="0" y="34" fill="#93c5fd" font-size="8" text-anchor="middle">MERIDIAN</text>
+        </g>
+
+        <!-- DYNAMIC CAD CONTENT CONTAINER -->
+        <g id="sheet-content">
+          <!-- Populated by JavaScript switchSheet() -->
+        </g>
+
+        <!-- INTERACTIVE MEASURE CALIPER OVERLAY (SVG LINE) -->
+        <g id="caliper-group" style="display:none;">
+          <line id="caliper-line" x1="0" y1="0" x2="0" y2="0" stroke="#f43f5e" stroke-width="2" stroke-dasharray="4,2"/>
+          <circle id="caliper-p1" cx="0" cy="0" r="4" fill="#f43f5e"/>
+          <circle id="caliper-p2" cx="0" cy="0" r="4" fill="#f43f5e"/>
+          <text id="caliper-text" x="0" y="0" fill="#f43f5e" font-size="12" font-weight="bold" filter="drop-shadow(0 2px 4px #000)"></text>
+        </g>
+      </svg>
+    </div>
+
+    <!-- MEASUREMENT HUD -->
+    <div class="hud-measure" id="hud-measure">
+      CALIPER: Click first reference point on drawing...
+    </div>
+  </main>
+</div>
+
+<footer>
+  <span id="coord-display">X: 0'-0" | Y: 0'-0"</span>
+  <span>ZOOM: <span id="zoom-display">100%</span> | PAN: DRAG CANVAS | AIA NCS V6 CAD LAYERS</span>
+  <span>ARCH D 36"×24" PLOT (1:96 SCALE)</span>
+</footer>
+
+<script>
+/* -------------------------------------------------------------
+   CAD ENGINE: PAN, ZOOM, MEASUREMENT & LAYER MANAGEMENT
+------------------------------------------------------------- */
+let zoom = 0.85;
+let panX = 40;
+let panY = 20;
+let isPanning = false;
+let startX, startY;
+let isMeasuring = false;
+let measureStep = 0;
+let mP1 = { x: 0, y: 0 };
+let currentSheetId = 'A102';
+
+const container = document.getElementById('blueprint-container');
+const viewport = document.getElementById('viewport');
+const coordDisplay = document.getElementById('coord-display');
+const zoomDisplay = document.getElementById('zoom-display');
+const hudMeasure = document.getElementById('hud-measure');
+const caliperGroup = document.getElementById('caliper-group');
+const caliperLine = document.getElementById('caliper-line');
+const caliperP1 = document.getElementById('caliper-p1');
+const caliperP2 = document.getElementById('caliper-p2');
+const caliperText = document.getElementById('caliper-text');
+
+function updateTransform() {
+  container.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+  zoomDisplay.textContent = `${Math.round(zoom * 100)}%`;
+}
+
+// Wheel Zoom
+viewport.addEventListener('wheel', (e) => {
+  e.preventDefault();
+  const zoomFactor = e.deltaY < 0 ? 1.12 : 0.89;
+  const newZoom = Math.min(Math.max(zoom * zoomFactor, 0.25), 4.5);
+
+  const rect = viewport.getBoundingClientRect();
+  const mouseX = e.clientX - rect.left;
+  const mouseY = e.clientY - rect.top;
+
+  panX = mouseX - (mouseX - panX) * (newZoom / zoom);
+  panY = mouseY - (mouseY - panY) * (newZoom / zoom);
+  zoom = newZoom;
+  updateTransform();
+});
+
+// Pan Dragging
+viewport.addEventListener('mousedown', (e) => {
+  if (isMeasuring) {
+    handleMeasureClick(e);
+    return;
+  }
+  isPanning = true;
+  startX = e.clientX - panX;
+  startY = e.clientY - panY;
+  viewport.classList.add('panning');
+});
+
+window.addEventListener('mousemove', (e) => {
+  // Update Coordinates
+  const svg = document.getElementById('cad-svg');
+  const pt = svg.createSVGPoint();
+  pt.x = e.clientX;
+  pt.y = e.clientY;
+  const svgP = pt.matrixTransform(svg.getScreenCTM().inverse());
+  // 1 drawing unit = 0.25 ft (4 units = 1 foot)
+  const realFeetX = Math.round((svgP.x / 4) * 10) / 10;
+  const realFeetY = Math.round((svgP.y / 4) * 10) / 10;
+  coordDisplay.textContent = `CAD X: ${realFeetX}'-0" | Y: ${realFeetY}'-0"`;
+
+  if (isMeasuring && measureStep === 1) {
+    caliperLine.setAttribute('x2', svgP.x);
+    caliperLine.setAttribute('y2', svgP.y);
+    caliperP2.setAttribute('cx', svgP.x);
+    caliperP2.setAttribute('cy', svgP.y);
+    const dx = (svgP.x - mP1.x) / 4;
+    const dy = (svgP.y - mP1.y) / 4;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    const distFt = Math.floor(dist);
+    const distIn = Math.round((dist - distFt) * 12);
+    caliperText.setAttribute('x', (mP1.x + svgP.x) / 2 + 10);
+    caliperText.setAttribute('y', (mP1.y + svgP.y) / 2 - 10);
+    caliperText.textContent = `${distFt}'-${distIn}" (${dist.toFixed(2)}')`;
+  }
+
+  if (!isPanning) return;
+  panX = e.clientX - startX;
+  panY = e.clientY - startY;
+  updateTransform();
+});
+
+window.addEventListener('mouseup', () => {
+  isPanning = false;
+  viewport.classList.remove('panning');
+});
+
+function resetView() {
+  zoom = 0.82;
+  panX = 35;
+  panY = 15;
+  updateTransform();
+}
+
+function toggleTheme() {
+  document.body.classList.toggle('theme-white');
+  const btn = document.getElementById('btn-theme');
+  btn.textContent = document.body.classList.contains('theme-white') ? 'BLACKLINE MODE' : 'BLUEPRINT MODE';
+}
+
+function toggleMeasure() {
+  isMeasuring = !isMeasuring;
+  const btn = document.getElementById('btn-measure');
+  btn.classList.toggle('active', isMeasuring);
+  viewport.classList.toggle('measuring', isMeasuring);
+  hudMeasure.style.display = isMeasuring ? 'block' : 'none';
+  if (!isMeasuring) {
+    caliperGroup.style.display = 'none';
+    measureStep = 0;
+  }
+}
+
+function handleMeasureClick(e) {
+  const svg = document.getElementById('cad-svg');
+  const pt = svg.createSVGPoint();
+  pt.x = e.clientX;
+  pt.y = e.clientY;
+  const svgP = pt.matrixTransform(svg.getScreenCTM().inverse());
+
+  if (measureStep === 0) {
+    mP1 = { x: svgP.x, y: svgP.y };
+    caliperP1.setAttribute('cx', mP1.x);
+    caliperP1.setAttribute('cy', mP1.y);
+    caliperLine.setAttribute('x1', mP1.x);
+    caliperLine.setAttribute('y1', mP1.y);
+    caliperLine.setAttribute('x2', mP1.x);
+    caliperLine.setAttribute('y2', mP1.y);
+    caliperGroup.style.display = 'block';
+    measureStep = 1;
+    hudMeasure.textContent = "CALIPER: Click second reference point to complete measurement...";
+  } else {
+    measureStep = 0;
+    hudMeasure.textContent = `MEASURED DISTANCE: ${caliperText.textContent} · Click again for new measurement.`;
+  }
+}
+
+function toggleLayer(layerClass) {
+  const chk = document.getElementById(`chk-${layerClass}`);
+  const els = document.querySelectorAll(`.${layerClass}`);
+  els.forEach(el => {
+    el.style.display = chk.checked ? '' : 'none';
+  });
+}
+
+/* -------------------------------------------------------------
+   SHEET RENDERERS (A-101 to A-106)
+------------------------------------------------------------- */
+function switchSheet(sheetId) {
+  currentSheetId = sheetId;
+  const content = document.getElementById('sheet-content');
+  const sheetTitle = document.getElementById('sheet-title-text');
+  const sheetNum = document.getElementById('sheet-num-text');
+
+  if (sheetId === 'A102') {
+    sheetTitle.textContent = "SHEET A-102: DECK 5 RESIDENTIAL FLOOR PLAN";
+    sheetNum.textContent = "A-102";
+    content.innerHTML = renderSheetA102();
+  } else if (sheetId === 'A101') {
+    sheetTitle.textContent = "SHEET A-101: 10-LEVEL HILLSIDE SECTION & ELEVATION";
+    sheetNum.textContent = "A-101";
+    content.innerHTML = renderSheetA101();
+  } else if (sheetId === 'A103') {
+    sheetTitle.textContent = "SHEET A-103: DECK 3 GRAND SPA & GLASS ATRIUM POOL";
+    sheetNum.textContent = "A-103";
+    content.innerHTML = renderSheetA103();
+  } else if (sheetId === 'A104') {
+    sheetTitle.textContent = "SHEET A-104: LEVEL 1 COMMERCIAL CONCOURSE & BODEGA";
+    sheetNum.textContent = "A-104";
+    content.innerHTML = renderSheetA104();
+  } else if (sheetId === 'A105') {
+    sheetTitle.textContent = "SHEET A-105: LOWER 2 & 3 SUBGRADE DATA CENTER & STAFF";
+    sheetNum.textContent = "A-105";
+    content.innerHTML = renderSheetA105();
+  } else if (sheetId === 'A106') {
+    sheetTitle.textContent = "SHEET A-106: ENLARGED SUITE MODULES & CASSETTE DETAILS";
+    sheetNum.textContent = "A-106";
+    content.innerHTML = renderSheetA106();
+  }
+}
+
+// -------------------------------------------------------------
+// SHEET A-102: DECK 5 RESIDENTIAL FLOOR PLAN (TWIN CARGO LIFTS)
+// -------------------------------------------------------------
+function renderSheetA102() {
+  return `
+    <!-- STRUCTURAL COLUMN GRIDS -->
+    <g class="A-GRID" stroke="#64748b" stroke-width="0.8" stroke-dasharray="10,4,2,4">
+      <!-- Vertical Grids 1 to 10 -->
+      ${[120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200].map((x, i) => `
+        <line x1="${x}" y1="120" x2="${x}" y2="860"/>
+        <circle cx="${x}" cy="100" r="14" fill="var(--cad-paper)" stroke="var(--cad-text)" stroke-width="1.2"/>
+        <text x="${x}" y="105" fill="var(--cad-text)" font-size="12" font-weight="bold" text-anchor="middle">${i + 1}</text>
+      `).join('')}
+
+      <!-- Horizontal Grids A to D -->
+      ${[200, 380, 560, 740].map((y, i) => `
+        <line x1="80" y1="${y}" x2="1240" y2="${y}"/>
+        <circle cx="60" cy="${y}" r="14" fill="var(--cad-paper)" stroke="var(--cad-text)" stroke-width="1.2"/>
+        <text x="60" y="${y + 5}" fill="var(--cad-text)" font-size="12" font-weight="bold" text-anchor="middle">${String.fromCharCode(65 + i)}</text>
+      `).join('')}
+    </g>
+
+    <!-- EXTERIOR WALLS (A-WALL-EXTR) -->
+    <g class="A-WALL-EXTR" fill="none" stroke="var(--cad-wall-extr)" stroke-width="3">
+      <!-- North Tower Outer Shell -->
+      <rect x="100" y="160" width="460" height="620"/>
+      <!-- South Tower Outer Shell -->
+      <rect x="760" y="160" width="460" height="620"/>
+      <!-- Atrium Transfer Bridge -->
+      <rect x="560" y="320" width="200" height="300" stroke-dasharray="8,4" stroke-width="1.5"/>
+    </g>
+
+    <!-- INTERIOR PARTITION WALLS (A-WALL-INTR) -->
+    <g class="A-WALL-INTR" fill="none" stroke="var(--cad-wall-intr)" stroke-width="1.5">
+      <!-- NORTH TOWER SLEEPING POD RUNS (Outer walls) -->
+      ${[120, 200, 280, 360, 440].map(x => `
+        <rect x="${x}" y="160" width="75" height="110"/>
+        <rect x="${x}" y="670" width="75" height="110"/>
+      `).join('')}
+
+      <!-- SOUTH TOWER SLEEPING POD RUNS -->
+      ${[780, 860, 940, 1020, 1100].map(x => `
+        <rect x="${x}" y="160" width="75" height="110"/>
+        <rect x="${x}" y="670" width="75" height="110"/>
+      `).join('')}
+
+      <!-- 6'-0" CONCOURSE HALLWAYS -->
+      <line x1="100" y1="290" x2="560" y2="290" stroke="#38bdf8" stroke-dasharray="6,3" stroke-width="1"/>
+      <line x1="100" y1="650" x2="560" y2="650" stroke="#38bdf8" stroke-dasharray="6,3" stroke-width="1"/>
+      <line x1="760" y1="290" x2="1220" y2="290" stroke="#38bdf8" stroke-dasharray="6,3" stroke-width="1"/>
+      <line x1="760" y1="650" x2="1220" y2="650" stroke="#38bdf8" stroke-dasharray="6,3" stroke-width="1"/>
+
+      <!-- CENTRAL CORES: BATHROOM PODS (TYPE B) -->
+      <rect x="180" y="350" width="300" height="240" fill="rgba(18, 63, 123, 0.4)"/>
+      <rect x="840" y="350" width="300" height="240" fill="rgba(18, 63, 123, 0.4)"/>
+    </g>
+
+    <!-- TWIN CARGO LIFTS (A-ELEV-CARGO) -->
+    <g class="A-ELEV-CARGO" stroke="var(--cad-cargo)" stroke-width="2">
+      <!-- NORTH TOWER CARGO LIFT (CL-1: 10,000 LB) -->
+      <rect x="360" y="390" width="90" height="120" fill="#1b2838"/>
+      <rect x="370" y="400" width="70" height="100" fill="none" stroke="#ffd166" stroke-width="1.5"/>
+      <line x1="370" y1="400" x2="440" y2="500"/>
+      <line x1="370" y1="500" x2="440" y2="400"/>
+      <!-- Bi-Parting Doors -->
+      <line x1="370" y1="510" x2="440" y2="510" stroke="#ffd166" stroke-width="4"/>
+      <text x="405" y="380" fill="var(--cad-cargo)" font-size="10" font-weight="bold" text-anchor="middle">CL-1 CARGO LIFT</text>
+      <text x="405" y="455" fill="#ffd166" font-size="8" font-weight="bold" text-anchor="middle">10,000 LB</text>
+      <text x="405" y="468" fill="#fff" font-size="7" text-anchor="middle">NORTH RIGGING</text>
+
+      <!-- SOUTH TOWER CARGO LIFT (CL-2: 10,000 LB) -->
+      <rect x="1020" y="390" width="90" height="120" fill="#1b2838"/>
+      <rect x="1030" y="400" width="70" height="100" fill="none" stroke="#ffd166" stroke-width="1.5"/>
+      <line x1="1030" y1="400" x2="1100" y2="500"/>
+      <line x1="1030" y1="500" x2="1100" y2="400"/>
+      <!-- Bi-Parting Doors -->
+      <line x1="1030" y1="510" x2="1100" y2="510" stroke="#ffd166" stroke-width="4"/>
+      <text x="1065" y="380" fill="var(--cad-cargo)" font-size="10" font-weight="bold" text-anchor="middle">CL-2 CARGO LIFT</text>
+      <text x="1065" y="455" fill="#ffd166" font-size="8" font-weight="bold" text-anchor="middle">10,000 LB</text>
+      <text x="1065" y="468" fill="#fff" font-size="7" text-anchor="middle">SOUTH RIGGING</text>
+    </g>
+
+    <!-- PDLC SMART-GLASS WINDOWS (A-GLAZ) -->
+    <g class="A-GLAZ" stroke="var(--cad-glaz)" stroke-width="3">
+      ${[120, 200, 280, 360, 440, 780, 860, 940, 1020, 1100].map(x => `
+        <line x1="${x + 8}" y1="160" x2="${x + 67}" y2="160"/>
+        <line x1="${x + 8}" y1="780" x2="${x + 67}" y2="780"/>
+      `).join('')}
+      <!-- Central Atrium Skylight Grid -->
+      <line x1="560" y1="320" x2="760" y2="320" stroke="#ffd166" stroke-width="2"/>
+      <line x1="560" y1="620" x2="760" y2="620" stroke="#ffd166" stroke-width="2"/>
+      <text x="660" y="465" fill="#60a5fa" font-size="11" font-weight="bold" text-anchor="middle">GLASS ATRIUM SKYLIGHT OVER</text>
+      <text x="660" y="482" fill="#ffd166" font-size="9" text-anchor="middle">[50' SPA LAP POOL BELOW]</text>
+    </g>
+
+    <!-- DOOR SWINGS (A-DOOR) -->
+    <g class="A-DOOR" fill="none" stroke="var(--cad-door)" stroke-width="1.2">
+      ${[120, 200, 280, 360, 440, 780, 860, 940, 1020, 1100].map(x => `
+        <line x1="${x + 10}" y1="270" x2="${x + 28}" y2="270"/>
+        <path d="M ${x + 28} 270 A 18 18 0 0 1 ${x + 10} 288"/>
+      `).join('')}
+    </g>
+
+    <!-- ROOM ANNOTATIONS (A-ANNO-TEXT) -->
+    <g class="A-ANNO-TEXT" fill="var(--cad-text)">
+      <text x="330" y="235" font-size="13" font-weight="bold" text-anchor="middle">NORTH TOWER (MEN'S RESIDENTIAL)</text>
+      <text x="990" y="235" font-size="13" font-weight="bold" text-anchor="middle">SOUTH TOWER (WOMEN'S RESIDENTIAL)</text>
+      <text x="330" y="475" fill="#ffd166" font-size="10" text-anchor="middle">CENTRAL CORE BATHROOMS</text>
+      <text x="990" y="475" fill="#ffd166" font-size="10" text-anchor="middle">CENTRAL CORE BATHROOMS</text>
+      <text x="330" y="630" fill="#38bdf8" font-size="9" text-anchor="middle">6'-0" ACOUSTIC CONCOURSE</text>
+      <text x="990" y="630" fill="#38bdf8" font-size="9" text-anchor="middle">6'-0" ACOUSTIC CONCOURSE</text>
+    </g>
+
+    <!-- DIMENSION STRINGS (A-ANNO-DIMS) -->
+    <g class="A-ANNO-DIMS" stroke="var(--cad-dim)" stroke-width="1" fill="var(--cad-dim)">
+      <!-- Overall Building Frontage: 380'-0" -->
+      <line x1="100" y1="840" x2="1220" y2="840"/>
+      <line x1="100" y1="830" x2="100" y2="850"/>
+      <line x1="1220" y1="830" x2="1220" y2="850"/>
+      <!-- 45-deg ticks -->
+      <line x1="96" y1="844" x2="104" y2="836" stroke-width="2"/>
+      <line x1="1216" y1="844" x2="1224" y2="836" stroke-width="2"/>
+      <text x="660" y="832" font-size="12" font-weight="bold" text-anchor="middle">380'-0" OVERALL BUILDING FRONTAGE</text>
+
+      <!-- North Tower Width: 155'-0" -->
+      <line x1="100" y1="880" x2="560" y2="880"/>
+      <line x1="96" y1="884" x2="104" y2="876" stroke-width="2"/>
+      <line x1="556" y1="884" x2="564" y2="876" stroke-width="2"/>
+      <text x="330" y="872" font-size="10" text-anchor="middle">155'-0" NORTH TOWER</text>
+
+      <!-- Glass Atrium Span: 70'-0" -->
+      <line x1="560" y1="880" x2="760" y2="880"/>
+      <line x1="556" y1="884" x2="564" y2="876" stroke-width="2"/>
+      <line x1="756" y1="884" x2="764" y2="876" stroke-width="2"/>
+      <text x="660" y="872" font-size="10" text-anchor="middle">70'-0" ATRIUM</text>
+
+      <!-- South Tower Width: 155'-0" -->
+      <line x1="760" y1="880" x2="1220" y2="880"/>
+      <line x1="756" y1="884" x2="764" y2="876" stroke-width="2"/>
+      <line x1="1216" y1="884" x2="1224" y2="876" stroke-width="2"/>
+      <text x="990" y="872" font-size="10" text-anchor="middle">155'-0" SOUTH TOWER</text>
+    </g>
+  `;
+}
+
+// -------------------------------------------------------------
+// SHEET A-101: 10-LEVEL HILLSIDE SECTION & ELEVATION
+// -------------------------------------------------------------
+function renderSheetA101() {
+  return `
+    <!-- NATURAL GRADE PROFILE (14' SLOPE TOWARD RIVER) -->
+    <path d="M 60 520 L 520 520 L 1100 680 L 1260 680" fill="none" stroke="#ffd166" stroke-width="3" stroke-dasharray="8,4"/>
+    <text x="240" y="505" fill="#ffd166" font-size="12" font-weight="bold">NE JEFFERSON AVENUE SIDEWALK GRADE [EL. 514.0']</text>
+    <text x="1100" y="705" fill="#ffd166" font-size="12" font-weight="bold">REAR ALLEY LOW GRADE [EL. 500.0']</text>
+
+    <!-- BUILDING ENVELOPE OUTLINE -->
+    <rect x="140" y="140" width="1080" height="760" fill="none" stroke="var(--cad-wall-extr)" stroke-width="3.5"/>
+
+    <!-- 10 HORIZONTAL FLOOR SLABS -->
+    ${[
+      { name: "TWIN ROOFTOPS (SKY DECKS)", el: "EL. 599.0'", y: 140 },
+      { name: "DECK 7 (RESIDENTIAL TIER 4)", el: "EL. 589.0'", y: 205 },
+      { name: "DECK 6 (RESIDENTIAL TIER 3)", el: "EL. 579.0'", y: 270 },
+      { name: "DECK 5 (RESIDENTIAL TIER 2)", el: "EL. 569.0'", y: 335 },
+      { name: "DECK 4 (RESIDENTIAL TIER 1)", el: "EL. 559.0'", y: 400 },
+      { name: "DECK 3 (GRAND SPA & ATRIUM POOL)", el: "EL. 544.0'", y: 465 },
+      { name: "LEVEL 2 (ALL-GENDER / FAMILY SUITES)", el: "EL. 530.0'", y: 535 },
+      { name: "LEVEL 1 (BODEGA & COFFEESHOP CONCOURSE)", el: "EL. 514.0'", y: 610 },
+      { name: "LOWER 1 (COVERED EV PARKING & DUAL DOCK)", el: "EL. 500.0'", y: 690 },
+      { name: "LOWER 2 (STAFF HUB & LAUNDRY PLANT)", el: "EL. 490.0'", y: 765 },
+      { name: "LOWER 3 (DATA CENTER MDF & HEAVY MEP)", el: "EL. 480.0'", y: 840 },
+    ].map(l => `
+      <line x1="140" y1="${l.y}" x2="1220" y2="${l.y}" stroke="var(--cad-wall-intr)" stroke-width="2"/>
+      <text x="160" y="${l.y - 8}" fill="#93c5fd" font-size="11" font-weight="bold">${l.name}</text>
+      <text x="1100" y="${l.y - 8}" fill="#ffd166" font-size="10" text-anchor="end">${l.el}</text>
+    `).join('')}
+
+    <!-- TWIN VERTICAL CARGO HOISTWAYS (CL-1 & CL-2) -->
+    <g fill="rgba(239, 68, 68, 0.15)" stroke="var(--cad-cargo)" stroke-width="2">
+      <!-- CL-1 North Hoistway -->
+      <rect x="360" y="140" width="90" height="760"/>
+      <text x="405" y="130" fill="var(--cad-cargo)" font-size="10" font-weight="bold" text-anchor="middle">CL-1 SHAFT (NORTH)</text>
+      <!-- CL-2 South Hoistway -->
+      <rect x="910" y="140" width="90" height="760"/>
+      <text x="955" y="130" fill="var(--cad-cargo)" font-size="10" font-weight="bold" text-anchor="middle">CL-2 SHAFT (SOUTH)</text>
+    </g>
+
+    <!-- CENTRAL GLASS ATRIUM ROOF (DECK 3) -->
+    <polygon points="560,465 680,380 800,465" fill="rgba(96, 165, 250, 0.2)" stroke="#ffd166" stroke-width="2.5"/>
+    <text x="680" y="370" fill="#ffd166" font-size="12" font-weight="bold" text-anchor="middle">BARREL-VAULTED GLASS ATRIUM</text>
+  `;
+}
+
+// -------------------------------------------------------------
+// SHEET A-103: DECK 3 GRAND THERMAL SPA & ATRIUM PLAN
+// -------------------------------------------------------------
+function renderSheetA103() {
+  return `
+    <rect x="100" y="160" width="1120" height="640" fill="none" stroke="var(--cad-wall-extr)" stroke-width="3"/>
+    
+    <!-- WEST WING: MEN'S SENTO BATHHOUSE -->
+    <rect x="120" y="180" width="420" height="600" fill="rgba(21, 68, 128, 0.3)" stroke="var(--cad-wall-intr)" stroke-width="2"/>
+    <text x="330" y="215" fill="#ffd166" font-size="14" font-weight="bold" text-anchor="middle">WEST: MEN'S SENTO & THERMAL BATHHOUSE</text>
+    <rect x="150" y="250" width="160" height="100" fill="#0284c7" stroke="#fff" stroke-width="1.5"/>
+    <text x="230" y="305" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold">HOT SOAK (40°C)</text>
+    <rect x="340" y="250" width="100" height="100" fill="#0369a1" stroke="#fff" stroke-width="1.5"/>
+    <text x="390" y="305" fill="#fff" font-size="10" text-anchor="middle" font-weight="bold">COLD (15°C)</text>
+    <rect x="150" y="380" width="290" height="120" fill="#78350f" stroke="#ffd166" stroke-width="1.5"/>
+    <text x="295" y="445" fill="#ffd166" font-size="12" text-anchor="middle" font-weight="bold">CEDAR DRY SAUNA (85°C)</text>
+
+    <!-- EAST WING: WOMEN'S SANCTUARY SPA -->
+    <rect x="780" y="180" width="420" height="600" fill="rgba(21, 68, 128, 0.3)" stroke="var(--cad-wall-intr)" stroke-width="2"/>
+    <text x="990" y="215" fill="#ffd166" font-size="14" font-weight="bold" text-anchor="middle">EAST: WOMEN'S SANCTUARY & MINERAL SPA</text>
+    <rect x="810" y="250" width="200" height="100" fill="#0284c7" stroke="#fff" stroke-width="1.5"/>
+    <text x="910" y="305" fill="#fff" font-size="11" text-anchor="middle" font-weight="bold">VITALITY SPA</text>
+    <rect x="810" y="380" width="290" height="120" fill="#be185d" stroke="#ffd166" stroke-width="1.5"/>
+    <text x="955" y="445" fill="#ffd166" font-size="12" text-anchor="middle" font-weight="bold">HIMALAYAN SALT SAUNA</text>
+
+    <!-- CENTRAL 50' HEATED LAP POOL UNDER GLASS ROOF -->
+    <rect x="560" y="180" width="200" height="600" fill="rgba(30, 58, 138, 0.4)" stroke="#ffd166" stroke-width="2.5"/>
+    <rect x="580" y="260" width="160" height="440" fill="#0284c7" stroke="#38bdf8" stroke-width="2"/>
+    <text x="660" y="470" fill="#fff" font-size="13" font-weight="bold" text-anchor="middle">50'-0" LAP POOL</text>
+    <text x="660" y="490" fill="#ffd166" font-size="10" text-anchor="middle">[HEATED 84°F]</text>
+  `;
+}
+
+// -------------------------------------------------------------
+// SHEET A-104: LEVEL 1 COMMERCIAL CONCOURSE & BODEGA
+// -------------------------------------------------------------
+function renderSheetA104() {
+  return `
+    <rect x="100" y="160" width="1120" height="640" fill="none" stroke="var(--cad-wall-extr)" stroke-width="3"/>
+    
+    <!-- COFFEESHOP & BAKERY (3,000 SF) -->
+    <rect x="120" y="180" width="300" height="380" fill="rgba(30, 58, 138, 0.3)" stroke="var(--cad-wall-intr)" stroke-width="2"/>
+    <text x="270" y="220" fill="#ffd166" font-size="14" font-weight="bold" text-anchor="middle">SPECIALTY COFFEESHOP & BAKERY</text>
+    <text x="270" y="240" fill="#bcd6f5" font-size="10" text-anchor="middle">3,000 SF · OUTDOOR PATIO SEATING</text>
+    <rect x="140" y="270" width="260" height="60" fill="#1e3a5f" stroke="#fff"/>
+    <text x="270" y="305" fill="#fff" font-size="11" text-anchor="middle">ESPRESSO BAR & ORDER COUNTER</text>
+
+    <!-- PUBLIC BODEGA / MICRO-GROCERY (7,000 SF) -->
+    <rect x="440" y="180" width="500" height="480" fill="rgba(30, 58, 138, 0.3)" stroke="var(--cad-wall-intr)" stroke-width="2"/>
+    <text x="690" y="220" fill="#ffd166" font-size="14" font-weight="bold" text-anchor="middle">PUBLIC BODEGA / MICRO-GROCERY</text>
+    <text x="690" y="240" fill="#bcd6f5" font-size="10" text-anchor="middle">7,000 SF · FRESH PRODUCE · DELI · CRAFT BEER</text>
+    ${[280, 340, 400, 460].map(y => `
+      <rect x="480" y="${y}" width="420" height="30" fill="#1e3a5f" stroke="#fff" stroke-width="0.8"/>
+      <text x="690" y="${y + 19}" fill="#cbd5e1" font-size="9" text-anchor="middle">GROCERY AISLE GONDOLA</text>
+    `).join('')}
+
+    <!-- HOTEL & MEMBER RECEPTION LOBBY (8,000 SF) -->
+    <rect x="960" y="180" width="240" height="480" fill="rgba(30, 58, 138, 0.3)" stroke="var(--cad-wall-intr)" stroke-width="2"/>
+    <text x="1080" y="220" fill="#ffd166" font-size="13" font-weight="bold" text-anchor="middle">HOTEL LOBBY & RECEPTION</text>
+    <rect x="990" y="270" width="180" height="50" fill="#1e3a5f" stroke="#ffd166"/>
+    <text x="1080" y="300" fill="#ffd166" font-size="10" text-anchor="middle">CONCIERGE DESK</text>
+  `;
+}
+
+// -------------------------------------------------------------
+// SHEET A-105: LOWER 2 & LOWER 3 SUBGRADE DATA CENTER & STAFF
+// -------------------------------------------------------------
+function renderSheetA105() {
+  return `
+    <!-- LOWER 3: DATA CENTER (MDF) & HEAVY MEP -->
+    <rect x="100" y="160" width="540" height="640" fill="rgba(15, 23, 42, 0.5)" stroke="var(--cad-wall-extr)" stroke-width="2.5"/>
+    <text x="370" y="200" fill="#38bdf8" font-size="14" font-weight="bold" text-anchor="middle">LOWER 3: MISSION-CRITICAL DATA CENTER (EL. 480.0')</text>
+    
+    <!-- 8x 42U Server Racks in Hot-Aisle Containment -->
+    <rect x="140" y="250" width="220" height="160" fill="#0d1b2a" stroke="#38bdf8" stroke-width="1.5"/>
+    <text x="250" y="280" fill="#38bdf8" font-size="10" font-weight="bold" text-anchor="middle">8× 42U SERVER RACKS (MDF)</text>
+    <text x="250" y="300" fill="#fff" font-size="9" text-anchor="middle">N+1 CRAC · 120 kVA UPS</text>
+    <text x="250" y="320" fill="#10b981" font-size="9" text-anchor="middle">NOVEC 1230 GAS SUPPRESSION</text>
+
+    <!-- Heavy MEP: 3000A Switchgear & Generator -->
+    <rect x="380" y="250" width="230" height="160" fill="#0d1b2a" stroke="#ffd166" stroke-width="1.5"/>
+    <text x="495" y="280" fill="#ffd166" font-size="10" font-weight="bold" text-anchor="middle">3000A MAIN SWITCHGEAR</text>
+    <text x="495" y="300" fill="#fff" font-size="9" text-anchor="middle">250 kW DIESEL GENERATOR</text>
+    <text x="495" y="320" fill="#93c5fd" font-size="9" text-anchor="middle">45,000-GAL RETENTION VAULT</text>
+
+    <!-- LOWER 2: STAFF AMENITIES & COMMERCIAL LAUNDRY -->
+    <rect x="680" y="160" width="540" height="640" fill="rgba(15, 23, 42, 0.5)" stroke="var(--cad-wall-extr)" stroke-width="2.5"/>
+    <text x="950" y="200" fill="#ffd166" font-size="14" font-weight="bold" text-anchor="middle">LOWER 2: STAFF AMENITIES & LAUNDRY (EL. 490.0')</text>
+
+    <!-- Staff Recharge Breakroom & Nap Pods -->
+    <rect x="710" y="250" width="230" height="160" fill="#163e69" stroke="#fff" stroke-width="1.2"/>
+    <text x="825" y="280" fill="#ffd166" font-size="10" font-weight="bold" text-anchor="middle">STAFF RECHARGE LOUNGE</text>
+    <text x="825" y="300" fill="#fff" font-size="9" text-anchor="middle">COMMERCIAL KITCHENETTE</text>
+    <text x="825" y="320" fill="#38bdf8" font-size="9" text-anchor="middle">4× SHIFT NAP PODS</text>
+
+    <!-- Commercial Laundry Plant -->
+    <rect x="960" y="250" width="230" height="160" fill="#163e69" stroke="#fff" stroke-width="1.2"/>
+    <text x="1075" y="280" fill="#ffd166" font-size="10" font-weight="bold" text-anchor="middle">COMMERCIAL LAUNDRY PLANT</text>
+    <text x="1075" y="300" fill="#fff" font-size="9" text-anchor="middle">4× BARRIER WASHERS</text>
+    <text x="1075" y="320" fill="#fff" font-size="9" text-anchor="middle">4× 120-GAL DHW HEAT PUMPS</text>
+  `;
+}
+
+// -------------------------------------------------------------
+// SHEET A-106: ENLARGED SUITE MODULES & CASSETTE DETAILS
+// -------------------------------------------------------------
+function renderSheetA106() {
+  return `
+    <!-- SUITE TYPES MATRIX (5-FOOT MODULAR GRID) -->
+    <!-- POD TYPE A: 20' TWIN STANDARD -->
+    <g transform="translate(100, 160)">
+      <rect x="0" y="0" width="320" height="180" fill="#154480" stroke="#fff" stroke-width="2"/>
+      <text x="160" y="30" fill="#ffd166" font-size="12" font-weight="bold" text-anchor="middle">POD TYPE A · 20'W × 10'D TWIN STANDARD (200 SF)</text>
+      <rect x="20" y="50" width="120" height="110" fill="#1b5a9e" stroke="#ffd166"/>
+      <text x="80" y="110" fill="#fff" font-size="10" text-anchor="middle">BERTH A1 (LOWER)</text>
+      <rect x="180" y="50" width="120" height="110" fill="#1b5a9e" stroke="#ffd166"/>
+      <text x="240" y="110" fill="#fff" font-size="10" text-anchor="middle">BERTH A2 (UPPER)</text>
+      <line x1="0" y1="0" x2="320" y2="0" stroke="#60a5fa" stroke-width="4"/>
+      <text x="160" y="-8" fill="#60a5fa" font-size="9" text-anchor="middle">PDLC SMART-GLASS MIRROR-WINDOW</text>
+    </g>
+
+    <!-- POD TYPE C: 10' EXEC SOLO -->
+    <g transform="translate(460, 160)">
+      <rect x="0" y="0" width="180" height="180" fill="#154480" stroke="#fff" stroke-width="2"/>
+      <text x="90" y="30" fill="#ffd166" font-size="11" font-weight="bold" text-anchor="middle">POD TYPE C · 10'W (100 SF)</text>
+      <rect x="20" y="50" width="140" height="70" fill="#1b5a9e" stroke="#ffd166"/>
+      <text x="90" y="90" fill="#fff" font-size="9" text-anchor="middle">QUEEN BERTH</text>
+      <rect x="20" y="130" width="140" height="35" fill="#1e3a5f" stroke="#fff"/>
+      <text x="90" y="152" fill="#fff" font-size="8" text-anchor="middle">EXEC DESK / MONITOR</text>
+    </g>
+
+    <!-- POD TYPE D: 15' COUPLES SUITE -->
+    <g transform="translate(680, 160)">
+      <rect x="0" y="0" width="260" height="180" fill="#154480" stroke="#fff" stroke-width="2"/>
+      <text x="130" y="30" fill="#ffd166" font-size="11" font-weight="bold" text-anchor="middle">POD TYPE D · 15'W COUPLES (150 SF)</text>
+      <rect x="20" y="50" width="120" height="110" fill="#1b5a9e" stroke="#ffd166"/>
+      <text x="80" y="110" fill="#fff" font-size="9" text-anchor="middle">QUEEN BED</text>
+      <rect x="150" y="50" width="90" height="110" fill="#1e3a5f" stroke="#fff"/>
+      <text x="195" y="110" fill="#fff" font-size="8" text-anchor="middle">BANQUETTE</text>
+    </g>
+
+    <!-- POD TYPE E: 20' FAMILY QUAD -->
+    <g transform="translate(980, 160)">
+      <rect x="0" y="0" width="320" height="180" fill="#154480" stroke="#fff" stroke-width="2"/>
+      <text x="160" y="30" fill="#ffd166" font-size="11" font-weight="bold" text-anchor="middle">POD TYPE E · 20'W FAMILY QUAD (200 SF)</text>
+      <rect x="20" y="50" width="120" height="110" fill="#1b5a9e" stroke="#ffd166"/>
+      <text x="80" y="110" fill="#fff" font-size="9" text-anchor="middle">BUNKS 1-2</text>
+      <rect x="180" y="50" width="120" height="110" fill="#1b5a9e" stroke="#ffd166"/>
+      <text x="240" y="110" fill="#fff" font-size="9" text-anchor="middle">BUNKS 3-4</text>
+    </g>
+
+    <!-- DETAIL 1: 5'x10' PANELIZED CASSETTE CAM-LOCK CONNECTION -->
+    <g transform="translate(100, 420)">
+      <rect x="0" y="0" width="540" height="360" fill="rgba(11, 36, 71, 0.6)" stroke="#ffd166" stroke-width="2"/>
+      <text x="270" y="35" fill="#ffd166" font-size="13" font-weight="bold" text-anchor="middle">DETAIL 1: 5'×10' PANELIZED CASSETTE & ROTARY CAM-LOCK (SCALE 1:10)</text>
+      <rect x="60" y="80" width="180" height="220" fill="#1e4475" stroke="#fff" stroke-width="1.5"/>
+      <text x="150" y="190" fill="#fff" font-size="10" text-anchor="middle">CASSETTE PANEL A</text>
+      <rect x="300" y="80" width="180" height="220" fill="#1e4475" stroke="#fff" stroke-width="1.5"/>
+      <text x="390" y="190" fill="#fff" font-size="10" text-anchor="middle">CASSETTE PANEL B</text>
+      <!-- Cam-Lock & Dual EPDM Acoustic Seals -->
+      <circle cx="270" cy="190" r="22" fill="#ffd166" stroke="#000" stroke-width="2"/>
+      <text x="270" y="195" fill="#000" font-size="8" font-weight="bold" text-anchor="middle">CAM-LOCK</text>
+      <line x1="242" y1="80" x2="242" y2="300" stroke="#f43f5e" stroke-width="3"/>
+      <line x1="298" y1="80" x2="298" y2="300" stroke="#f43f5e" stroke-width="3"/>
+      <text x="270" y="330" fill="#f43f5e" font-size="9" text-anchor="middle" font-weight="bold">DUAL-BULB EPDM ACOUSTIC SEALS (STC 58)</text>
+    </g>
+
+    <!-- DETAIL 2: PDLC SMART-GLASS MIRROR-WINDOW CASSETTE -->
+    <g transform="translate(680, 420)">
+      <rect x="0" y="0" width="620" height="360" fill="rgba(11, 36, 71, 0.6)" stroke="#ffd166" stroke-width="2"/>
+      <text x="310" y="35" fill="#ffd166" font-size="13" font-weight="bold" text-anchor="middle">DETAIL 2: PDLC SWITCHABLE SMART-GLASS WALL (SCALE 1:5)</text>
+      <rect x="60" y="80" width="500" height="40" fill="#60a5fa" stroke="#fff"/>
+      <text x="310" y="105" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">OUTER LAMINATED GLASS (6mm)</text>
+      <rect x="60" y="125" width="500" height="20" fill="#ffd166" stroke="#000"/>
+      <text x="310" y="140" fill="#000" font-size="10" font-weight="bold" text-anchor="middle">PDLC LIQUID CRYSTAL FILM (48V AC LOW-VOLTAGE)</text>
+      <rect x="60" y="150" width="500" height="40" fill="#60a5fa" stroke="#fff"/>
+      <text x="310" y="175" fill="#000" font-size="11" font-weight="bold" text-anchor="middle">INNER REFLECTIVE MIRROR GLASS (6mm)</text>
+      <text x="310" y="240" fill="#bcd6f5" font-size="10" text-anchor="middle">UNPOWERED (0V): 100% PRIVATE REFLECTIVE MIRROR (<1% VLT)</text>
+      <text x="310" y="265" fill="#ffd166" font-size="10" text-anchor="middle">POWERED (48V): 91% TRANSPARENT RIVER & SKYLINE PANORAMA</text>
+      <text x="310" y="295" fill="#10b981" font-size="10" text-anchor="middle" font-weight="bold">ACOUSTIC RATING: STC 41 · SWITCH SPEED: < 80ms</text>
+    </g>
+  `;
+}
+
+// Initial Render
+switchSheet('A102');
+
+// Direct DXF Download Handler
+function downloadCurrentDxf() {
+  const fileMap = {
+    'A101': 'campus_10level_section.dxf',
+    'A102': 'campus_deck5_residential_plan.dxf',
+    'A103': 'campus_deck5_residential_plan.dxf',
+    'A104': 'campus_deck5_residential_plan.dxf',
+    'A105': 'campus_10level_section.dxf',
+    'A106': 'campus_deck5_residential_plan.dxf',
+  };
+  const targetFile = fileMap[currentSheetId] || 'campus_deck5_residential_plan.dxf';
+  const url = `../cad/${targetFile}`;
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = targetFile;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+</script>
+</body>
+</html>

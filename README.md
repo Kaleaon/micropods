@@ -35,11 +35,15 @@ Open `dist/index.html` directly — no server needed.
 ## Docs
 
 - `docs/blueprints/` — dimensioned architectural plan sheets & 3D viewers (HTML/SVG/WebGL):
+  - `cad_blueprint_suite.html` — **ARCH D (36"×24") Architectural CAD Blueprint Suite** (Pan/Zoom, Caliper Distance Measure Tool, AIA Layer Manager, Blueprint/Blackline Toggle, Vector Print, and Direct AutoCAD DXF Export)
   - `campus_rendering_3d.html` — **Interactive 3D Architectural Exterior & Site Rendering** (Sloped 1.49-acre campus, retail glass, central atrium pool, twin towers, sky decks, day/night, zoning planes)
   - `campus_master_plan.html` — **Complete 9-Sheet Architectural Blueprint Set** (Civil, 10-Level Section, Plans, Core, Matrix, Lift, Sheet A-8 Subgrade Data Center & Staff Hub, Sheet R-1 Rendering Perspective & Code Matrix)
   - `pod_type_b_bath.html` — 10'×10' Full Bathroom Pod blueprints
   - `pod_type_a.html` — Twin Sleeping Pod blueprints & MEP notes
   - `pod_type_a_iso.html` — Standalone SVG isometric dollhouse cutaways
+- `docs/cad/` — **AutoCAD R12/2000 DXF Vector CAD Files (AIA Layer Standard)**:
+  - `campus_deck5_residential_plan.dxf` — 1:1 AutoCAD vector drawing with layers (`A-WALL`, `A-DOOR`, `A-GLAZ`, `A-ELEV-CARGO`, `A-GRID`, `A-DIMS`, `A-TEXT`)
+  - `campus_10level_section.dxf` — 1:1 AutoCAD vector drawing with 10 floor elevations (NAVD88), twin hoistways & atrium
 - `docs/engineering/` — engineering, structural, MEP, statutory zoning & cost basis:
   - `LIGHTING_CIRCADIAN_SPEC.md` — **3-Layer Lighting (Ambient/Task/Accent), Lux Calculations, 24-Hour Circadian Kelvin Curve & STC Acoustics**
   - `CONTRACTOR_SPEC_SCHEDULE.md` — **CSI MasterFormat Contractor Specification Schedule, Room-by-Room Finishes, MEP Drops & GC Phasing**
